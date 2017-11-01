@@ -21,7 +21,7 @@ page-home {
     .label-md{
         margin: 0px !important;
     }
-    .item-md.item-block .item-inner{
+    .item-md .item-block .item-inner{
         padding: 0px !important;
     }
     .homepageRcmdBtnIcon{
@@ -30,7 +30,7 @@ page-home {
     }
     .homepageRcmdBtnText{
         color: white; 
-        vertical-align:middle
+        vertical-align: middle
     }
     .fillWidth{
         width: 100%
@@ -39,7 +39,10 @@ page-home {
         height: 30em
     }
     .homepageProducerImg{
-        height: 5em;
-        width: 5em;
+        height: 2em;
+        width: 2em;
+    }
+    ion-card img{
+        display: inline;
     }
 }
