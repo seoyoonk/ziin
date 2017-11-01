@@ -115,7 +115,7 @@ export class StartProvider {
 
         this.rest.showLoading("로그인 중입니다.");
       }
-      console.log("ziin: appStart " + JSON.stringify(this.rest.deviceInfo ));
+      
       this.rest.appStart().subscribe(
         res => {
           this.rest.closeLoading();
