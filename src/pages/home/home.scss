@@ -21,7 +21,7 @@ page-home {
     .label-md{
         margin: 0px !important;
     }
-    .item-md .item-block .item-inner{
+    .item-md.item-block .item-inner{
         padding: 0px !important;
     }
     .homepageRcmdBtnIcon{
@@ -36,7 +36,7 @@ page-home {
         width: 100%
     }
     .homepageGoodsImg{
-        height: 30em
+        width: 95%;
     }
     .homepageProducerImg{
         height: 2em;
