@@ -31,9 +31,7 @@ export class StartProvider {
   constructor(private app: App, private device: Device, private modalCtrl: ModalController,
     public kakao: KakaoTalk, public rest: RestProvider, private storage: Storage,
     private sim: Sim) {
-    this.rest.deviceInfo.device_id = this.device.uuid;
-    this.rest.deviceInfo.os_type = this.device.platform;
-    this.rest.deviceInfo.os_ver = this.device.version;
+    
   }
 
   getFCMToken() {
@@ -64,6 +62,9 @@ export class StartProvider {
   }
   onStart(splashScreen: SplashScreen) {
     console.log("ziin: onStart");
+    this.rest.deviceInfo.device_id = this.device.uuid;
+    this.rest.deviceInfo.os_type = this.device.platform;
+    this.rest.deviceInfo.os_ver = this.device.version;
     if (typeof (FCMPlugin) !== "undefined") {
       FCMPlugin.onNotification(data => alert(JSON.stringify(data)));
     }
@@ -114,6 +115,7 @@ export class StartProvider {
 
         this.rest.showLoading("로그인 중입니다.");
       }
+      console.log("ziin: appStart " + JSON.stringify(this.rest.deviceInfo ));
       this.rest.appStart().subscribe(
         res => {
           this.rest.closeLoading();

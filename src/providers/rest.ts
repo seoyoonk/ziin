@@ -52,7 +52,7 @@ export class RestProvider {
           return { result_code: -1 };
         }
         else if (res.headers.get('x-auth-result') == 'auth_success') {
-          this.deviceInfo.auth_token = res.headers.get('auth_token');
+          if(res.headers.get('auth_token') != null) this.deviceInfo.auth_token = res.headers.get('auth_token');
           return { result_code: 0 };
         }
         else {
@@ -85,7 +85,7 @@ export class RestProvider {
     headers.append('Content-Type', 'application/json');
 
     headers.append("x-app-agent", JSON.stringify(this.deviceInfo));
-
+    console.log("ziin: " + url);
     let param: any = new Object();
     param.req_data = param1;
     let res = this.http.post(this.apiUrl + url, param, { headers: headers });
