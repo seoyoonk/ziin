@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http,Headers } from '@angular/http';
-
+import { LoadingController  } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 
 /*
@@ -11,24 +11,80 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class RestProvider {
-  private apiUrl = 'http://192.168.0.17:8100';
-  id;
-  constructor(public http: Http) {
-    console.log('Hello RestProvider Provider');
+  private apiUrl = 'http://192.168.0.17:8080';
+  public app_ver="0.1";
+  public app_id="com.fliconz.ziin";
+  loading;
+
+  public userInfo= { mobile:'', mem_nm:'', email:'' , mem_img:'', sns:'', sns_id:'', push_token:''}; 
+  public deviceInfo= { app_ver: this.app_ver, app_id: this.app_id, device_id:'', os_type:'', os_ver:'', auth_token:'NO_HAS_APP_TOKEN'}; 
+  constructor(public http: Http, private loadingCtrl:LoadingController) {
+    
   }
-  appStart(phone:string)
+  login(loginInfo)
   {
-    alert(phone);
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    headers.append("x-phone", phone);
     
+    return this.post('/api/member/login.do',loginInfo).map(res=>res.json());
+  }
+  showLoading(msg)
+  {
+    this.loading = this.loadingCtrl.create({
+      content: msg
+    });
+    this.loading.present();
+  }
+  closeLoading()
+  {
+    if(this.loading !=null ) this.loading.dismiss();
+  }
+  appStart()
+  {
     
-    return this.http.get("http://192.168.0.17:8090/test/appStart.jsp", {headers : headers } ).map(
-        res => res.json()
+    let response = this.post("/api/appStart.do", this.userInfo);
+    return response.map(
+        (res) => {
+          alert(JSON.stringify(res.headers)); // Print http header
+          if(res.headers.get("x-auth-result") == 'not_found_user')
+          {
+            return {result_code:-1};
+          }
+          else if(res.headers.get('x-auth-result') == 'auth_success')
+          {
+            this.deviceInfo.auth_token = res.headers.get('auth_token');
+            return {result_code:0};
+          }
+          else{
+            alert(res.headers.get('x-auth-result'));
+            return {result_code:-2}; // auth fail
+          }
+        
+        }
+        
     )
     
   }
+  private post(url, param1:any)
+  {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    
+    headers.append("x-app-agent", JSON.stringify(this.deviceInfo));
+    let param : any = new Object();
+    param.req_data = param1;
+    console.log("ziin: before post " + this.apiUrl + url);
+    return this.http.post(this.apiUrl + url , param, {headers : headers } )
+  }
+
+  insertMember()
+  {
+    return this.post("/api/member/insertMember.do", this.userInfo).map(
+      (res) => {
+        this.deviceInfo.auth_token = res.headers.get('auth_token');
+        return res.json() ;
+      }
+    );
+  }
+
   getDeliveryList(kubun : string) {
     var response = this.http.get("http://192.168.0.17:8090/test/deliveryList.jsp").map(res => res.json());
     return response;

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "581381915050",
+    "firebase_url": "https://ziin-market-d242e.firebaseio.com",
+    "project_id": "ziin-market-d242e",
+    "storage_bucket": "ziin-market-d242e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:581381915050:android:0678dc46163ed22a",
+        "android_client_info": {
+          "package_name": "com.fliconz.ziin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "581381915050-duia7535dampqhcrech56a6ifjthv0v7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBr4bSjsOw59g87fBw0AP3QWdPdtc-Jwq8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
