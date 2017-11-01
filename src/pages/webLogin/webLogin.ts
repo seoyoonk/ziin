@@ -20,6 +20,7 @@ export class WebLoginPage {
       (res)=>{
         if(res.res_code == 'ok')
         {
+          
           this.navCtrl.setRoot(HomePage);
         }
         else

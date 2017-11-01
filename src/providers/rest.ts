@@ -23,7 +23,15 @@ export class RestProvider {
   }
   login(loginInfo) {
 
-    return this.post('/api/member/login.do', loginInfo).map(res => res.json());
+    return this.post('/api/member/login.do', loginInfo).map(res =>
+      {
+        this.deviceInfo.device_id="fc85bf4b81491385";
+        console.log(res.json());
+        this.deviceInfo.auth_token = res.json().res_data.auth_token;
+        this.userInfo.email = res.json().res_data.email;
+        
+        return res.json();
+      } );
   }
   showLoading(msg) {
     this.loading = this.loadingCtrl.create({
@@ -80,19 +88,22 @@ export class RestProvider {
 
     let param: any = new Object();
     param.req_data = param1;
-    console.log("ziin: before post " + this.apiUrl + url);
-    console.log("headers : ");
-    console.log(headers);
-    console.log("params : ");
-    console.log(param1);
-    console.log("...\n...\n");
     let res = this.http.post(this.apiUrl + url, param, { headers: headers });
-    console.log("response : ");
-    console.log(res);
-    console.log("\n\n\n\n");
+    
     return res;
   }
+  private get(url)
+  {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencode');
 
+    headers.append("x-app-agent", JSON.stringify(this.deviceInfo));
+
+    
+    let res = this.http.get(this.apiUrl + url,  { headers: headers });
+    
+    return res;
+  }
   insertMember() {
     return this.post("/api/member/insertMember.do", this.userInfo).map(
       (res) => {
@@ -112,7 +123,7 @@ export class RestProvider {
     return response;
   }
   selectListGoodsRcmd() {
-    return this.post("/api/goodsRcmd/selectListGoodsRcmd.do", this.userInfo).map(
+    return this.post("/api/goodsRcmd/selectListGoodsRcmd.do",{page_no:1, row_count:100}).map(
       (res) => {
         return res.json();
       });
