@@ -1,3 +1,45 @@
 page-home {
-
+    .divCenter{
+        position:absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      
+        display: -webkit-flex;
+        -webkit-align-item: center;
+        -webkit-justify-content: center;
+        background: #FFAE00;
+    }
+    .noMarginNoPadding{
+        margin: 0px !important;
+        padding: 0px !important;
+    }
+    .label-md{
+        margin: 0px !important;
+    }
+    .item-md.item-block .item-inner{
+        padding: 0px !important;
+    }
+    .homepageRcmdBtnIcon{
+        height: 2em;
+        width: 2em;
+    }
+    .homepageRcmdBtnText{
+        color: white; 
+        vertical-align:middle
+    }
+    .fillWidth{
+        width: 100%
+    }
+    .homepageGoodsImg{
+        height: 30em
+    }
+    .homepageProducerImg{
+        height: 5em;
+        width: 5em;
+    }
 }

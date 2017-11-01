@@ -19,7 +19,6 @@ export class MyApp {
   pages: Array<{title: string, component: any}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private rest:RestProvider, private sim: Sim) {
-    alert("1");
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -31,13 +30,12 @@ export class MyApp {
   }
 
   initializeApp() {
-    alert("2");
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
 
-    this.sim.requestReadPermission();
-      this.getPhoneNumber();
+      //this.sim.requestReadPermission();
+      //this.getPhoneNumber();
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
@@ -51,7 +49,6 @@ export class MyApp {
 
   getPhoneNumber()
   {
-    alert("3");
     this.sim.getSimInfo().then(
       (info) => {
         alert(info.phoneNumber);
