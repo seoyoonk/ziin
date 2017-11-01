@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>로그인</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    
+        <ion-item>
+          <ion-label stacked>Username</ion-label>
+          <ion-input type="text"  [(ngModel)]="loginInfo.email"></ion-input>
+        </ion-item>
+    
+        <ion-item>
+          <ion-label stacked>Password</ion-label>
+          <ion-input type="password"  [(ngModel)]="loginInfo.pwd"></ion-input>
+        </ion-item>
+    
+      </ion-list>
+    
+      <div padding>
+        <button ion-button color="primary" block (click)=login()>로그인</button>
+        <button ion-button color="primary" block (click)=goRegister()>회원가입</button>
+      </div>
+</ion-content>

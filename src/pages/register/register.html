@@ -1,0 +1,39 @@
+
+<ion-header>
+    
+    <ion-navbar>
+        
+      <ion-title>회원가입</ion-title>
+      <ion-buttons start>
+          <button ion-button (click)="dismiss()">
+            <span ion-text color="primary" showWhen="ios">Cancel</span>
+            <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+          </button>
+        </ion-buttons>
+    </ion-navbar>
+    
+    </ion-header>
+    
+    
+    <ion-content >
+    
+    <ion-list>
+      <ion-item>
+        <ion-label stacked color="dark">이름</ion-label>
+        <ion-input type="text" [(ngModel)]="userInfo.mem_nm"></ion-input>
+      </ion-item>
+      <ion-item>
+        <p class="detail-title">전화번호</p>
+        <p class="detail-data">{{userInfo.mobile}}</p>
+      </ion-item>
+      <ion-item>
+        <p class="detail-title">이메일</p>
+        <p class="detail-data">{{userInfo.email}}</p>
+      </ion-item>
+    </ion-list>
+    <div padding>
+        <button ion-button color="primary" (click)="insertMember()" block>회원가입</button>
+      </div>
+    </ion-content>
+      
+    
