@@ -2,6 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, NavController, ModalController } from 'ionic-angular';
 import { ListPage } from '../list/list';
 import { GoodsRegisterPage } from '../goodsRegister/goodsRegister';
+import { RestProvider } from '../../providers/rest';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -13,11 +15,19 @@ export class HomePage {
 
   pages:any;
 
-  constructor(private navCtrl: NavController, private modalCtrl : ModalController) {
+  ionViewDidLoad(){
+    this.rest.selectListGoodsRcmd().subscribe(
+      res => {
+        console.log(res);
+      },
+      err => {
+        alert("ERROR!: " + err);
+      }
+    );
     this.dataList = [];
-    for(let i = 0; i < 10; i++){
-      this.dataList.push({idx:i});
-    }
+  }
+
+  constructor(public navCtrl: NavController, private modalCtrl : ModalController, public rest : RestProvider) {
     this.pages = [
       { title: 'Home', component: HomePage },
       { title: 'List', component: ListPage }
@@ -26,8 +36,6 @@ export class HomePage {
   }
 
   openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
 
@@ -41,13 +49,6 @@ export class HomePage {
 
   itemClicked(item:any){
     this.dataList.push({idx:item.idx});
-  }
-
-  reset(){
-    this.dataList = [];
-    for(let i = 0; i < 10; i++){
-      this.dataList.push({idx:i});
-    }
   }
 
 }
