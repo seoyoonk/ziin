@@ -16,16 +16,20 @@ import { KakaoTalk } from 'ionic-plugin-kakaotalk';
 import { Device } from '@ionic-native/device';
 import { IonicStorageModule } from '@ionic/storage';
 import { WebLoginPage } from '../pages/webLogin/webLogin';
+import { GoodsRegisterPage } from '../pages/goodsRegister/goodsRegister';
 import { FCM } from '@ionic-native/fcm';
+import { Contacts } from '@ionic-native/contacts';
+import { TextMaskModule } from 'angular2-text-mask';
 @NgModule({
   declarations: [
     MyApp,
     HomePage,WebLoginPage,
-    ListPage, RegisterPage
+    ListPage, RegisterPage,GoodsRegisterPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
+    TextMaskModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
   ],
@@ -33,13 +37,13 @@ import { FCM } from '@ionic-native/fcm';
   entryComponents: [
     MyApp,
     HomePage,WebLoginPage,
-    ListPage, RegisterPage
+    ListPage, RegisterPage,GoodsRegisterPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     RestProvider, FCM,
-    Sim,KakaoTalk,Device,StartProvider,
+    Sim,KakaoTalk,Device,StartProvider,Contacts,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

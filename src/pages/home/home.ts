@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, NavController } from 'ionic-angular';
+import { Nav, NavController, ModalController } from 'ionic-angular';
 import { ListPage } from '../list/list';
-
+import { GoodsRegisterPage } from '../goodsRegister/goodsRegister';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -13,7 +13,7 @@ export class HomePage {
 
   pages:any;
 
-  constructor(public navCtrl: NavController) {
+  constructor(private navCtrl: NavController, private modalCtrl : ModalController) {
     this.dataList = [];
     for(let i = 0; i < 10; i++){
       this.dataList.push({idx:i});
@@ -31,8 +31,12 @@ export class HomePage {
     this.nav.setRoot(page.component);
   }
 
-  test(){
-    alert("FOOTER!!");
+  goGoodsRegister(){
+    let modal = this.modalCtrl.create(GoodsRegisterPage);
+    modal.present();
+    modal.onDidDismiss((data) => {
+      console.log('ziin: afterGoodsRegister ' + JSON.stringify(data));
+    });
   }
 
   itemClicked(item:any){

@@ -20,6 +20,7 @@
         "@angular/http": "4.4.3",
         "@angular/platform-browser": "4.4.3",
         "@angular/platform-browser-dynamic": "4.4.3",
+        "@ionic-native/contacts": "^4.3.2",
         "@ionic-native/core": "4.3.2",
         "@ionic-native/device": "^4.3.2",
         "@ionic-native/fcm": "^4.3.2",
@@ -27,7 +28,10 @@
         "@ionic-native/splash-screen": "4.3.2",
         "@ionic-native/status-bar": "4.3.2",
         "@ionic/storage": "^2.0.1",
+        "angular2-text-mask": "^8.0.4",
         "cordova-android": "^6.2.3",
+        "cordova-plugin-compat": "^1.0.0",
+        "cordova-plugin-contacts": "^2.3.1",
         "cordova-plugin-device": "^1.1.4",
         "cordova-plugin-fcm": "^2.1.2",
         "cordova-plugin-ionic-webview": "^1.1.16",
@@ -61,7 +65,8 @@
                 "KAKAO_APP_KEY": "7b17e484158c144531e814fbf09ffa60"
             },
             "cordova-sqlite-storage": {},
-            "cordova-plugin-fcm": {}
+            "cordova-plugin-fcm": {},
+            "cordova-plugin-contacts": {}
         },
         "platforms": [
             "android"

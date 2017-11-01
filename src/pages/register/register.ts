@@ -11,6 +11,10 @@ export class RegisterPage {
     this.userInfo = rest.userInfo;
 
   }
+  dismiss()
+  {
+      this.viewCtrl.dismiss();
+  }
   insertMember()
   {
       

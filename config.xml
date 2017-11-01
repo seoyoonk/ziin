@@ -92,4 +92,5 @@
     <allow-navigation href="http://192.168.0.17:8100" />
     <allow-navigation href="http://192.168.0.17:8101" />
     <plugin name="cordova-plugin-fcm" spec="^2.1.2" />
+    <plugin name="cordova-plugin-contacts" spec="^2.3.1" />
 </widget>
