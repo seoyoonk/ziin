@@ -19,6 +19,7 @@ export class HomePage {
     this.rest.selectListGoodsRcmd().subscribe(
       res => {
         console.log(res);
+        this.dataList = res.res_data.goods_list;
       },
       err => {
         alert("ERROR!: " + err);

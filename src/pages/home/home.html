@@ -22,16 +22,44 @@
   </ion-content>
 
 </ion-menu>
-<ion-nav [root]="rootPage" #content ></ion-nav>
-<ion-content>
-  <ion-list class="noMarginNoPadding">
-    <button class="noMarginNoPadding" ion-item *ngFor="let data of dataList" (click)="itemClicked(data)">
-      <ion-card class="noMarginNoPadding fillWidth">
-          <img class="homepageProducerImg" src="https://avatars3.githubusercontent.com/u/4013348?s=88&v=4">{{data}}<br>
-        <img class="homepageGoodsImg" src="https://avatars3.githubusercontent.com/u/4013348?s=88&v=4">
-      </ion-card>
-    </button>
-  </ion-list>
+<ion-nav [root]="rootPage" #content></ion-nav>
+<ion-content class="cards-bg social-cards">
+
+  <ion-card *ngFor="let data of dataList" (click)="itemClicked(data)">
+    <ion-item>
+      <ion-avatar item-start>
+        <img class="homepageProducerImg" [src]="'http://14.63.197.21:7070/resources/goods_image' + data.producer_img">
+      </ion-avatar>
+      <h2>{{data.register_nm}}</h2>
+      <p>{{data.reg_dttm}}</p>
+    </ion-item>
+
+    <ion-card-content>
+      <p>Your scientists were so preoccupied with whether or not they could, that they didn't stop to think if they should.</p>
+    </ion-card-content>
+    <img class="homepageGoodsImg" [src]="'http://14.63.197.21:7070/resources/goods_image' + data.list_img_1">
+    <ion-row>
+      <ion-col>
+        <button ion-button color="primary" clear small icon-start>
+          <ion-icon name='text'></ion-icon>
+          <span>댓글 {{data.comment_cnt}}</span>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button color="primary" clear small icon-start>
+          <ion-icon name='text'></ion-icon>
+          <span>주문 {{data.tot_sale_cnt}}</span>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button color="primary" clear small icon-start>
+          <ion-icon name='text'></ion-icon>
+          <span>재고수량 {{data.tot_stock_cnt}}</span>
+        </button>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
 </ion-content>
 <ion-footer >
   <ion-toolbar (click)="goGoodsRegister()" color="primary">
