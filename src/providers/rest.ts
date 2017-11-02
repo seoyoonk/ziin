@@ -16,8 +16,9 @@ export class RestProvider {
   public app_id = "com.fliconz.ziin";
   loading;
 
-  public userInfo = { mobile: '', mem_nm: '', email: '', mem_img: '', sns: '', sns_id: '', push_token: '' };
+  public userInfo = { mem_no:'', not_yet_read:0, mobile: '', mem_nm: '', email: '', mem_img: '', sns: '', sns_id: '', push_token: '' };
   public deviceInfo = { app_ver: this.app_ver, app_id: this.app_id, device_id: '', os_type: '', os_ver: '', auth_token: 'NO_HAS_APP_TOKEN' };
+  public config = {img_goods_root_path:''};
   constructor(public http: Http, private loadingCtrl: LoadingController) {
 
   }
@@ -26,10 +27,13 @@ export class RestProvider {
     return this.post('/api/member/login.do', loginInfo).map(res =>
       {
         this.deviceInfo.device_id="fc85bf4b81491385";
-        console.log(res.json());
-        this.deviceInfo.auth_token = res.json().res_data.auth_token;
-        this.userInfo.email = res.json().res_data.email;
         
+        let res_data = res.json().res_data;
+        this.deviceInfo.auth_token = res_data.auth_token;
+        this.userInfo.email = res_data.email;
+        this.userInfo.mem_no= res_data.mem_no;
+        this.userInfo.not_yet_read= res_data.not_yet_read;
+        this.config.img_goods_root_path = res_data.img_goods_root_path;
         return res.json();
       } );
   }
@@ -52,7 +56,14 @@ export class RestProvider {
           return { result_code: -1 };
         }
         else if (res.headers.get('x-auth-result') == 'auth_success') {
-          if(res.headers.get('auth_token') != null) this.deviceInfo.auth_token = res.headers.get('auth_token');
+          if(res.headers.get('auth_token') != null)
+          {
+            let res_data = res.json().res_data;
+            this.deviceInfo.auth_token = res.headers.get('auth_token');
+            this.userInfo.mem_no= res_data.mem_no;
+            this.userInfo.not_yet_read= res_data.not_yet_read;
+            this.config.img_goods_root_path = res_data.img_goods_root_path;
+          } 
           return { result_code: 0 };
         }
         else {
