@@ -12,7 +12,9 @@ page-home {
         display: -webkit-flex;
         -webkit-align-item: center;
         -webkit-justify-content: center;
-        background: #FFAE00;
+    }
+    .divVCenter{
+        vertical-align: middle;
     }
     .noMarginNoPadding{
         margin: 0px !important;
@@ -35,8 +37,10 @@ page-home {
     .fillWidth{
         width: 100%
     }
-    .homepageGoodsImg{
+    .listItemMargin{
         width: 95%;
+        margin-left: 2.5%;
+        margin-right: 2.5%;
     }
     .homepageProducerImg{
         height: 2em;
