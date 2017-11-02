@@ -1,5 +1,5 @@
 import { Component, ViewChild  } from '@angular/core';
-import { ToastController,  Platform , Nav} from 'ionic-angular';
+import { ToastController,  Platform , Nav, IonicApp} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StartProvider } from '../providers/start';
@@ -19,7 +19,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
   
   constructor(private platform: Platform, private toastCtrl:ToastController,private statusBar: StatusBar, 
-    private splashScreen: SplashScreen, private start:StartProvider) {
+    private splashScreen: SplashScreen, private start:StartProvider, private ionicApp: IonicApp,) {
     
     this.initializeApp();
 
@@ -39,6 +39,13 @@ export class MyApp {
       var timePeriodToExit  = 2000;
 
       this.platform.registerBackButtonAction(() => {
+        let activePortal = this.ionicApp._modalPortal.getActive();
+        if(activePortal)
+        {
+          activePortal.dismiss();
+        }
+        else
+        {
            if (!this.nav.canGoBack()) {
               //Double check to exit app
               if (new Date().getTime() - lastTimeBackPress < timePeriodToExit) {
@@ -56,6 +63,7 @@ export class MyApp {
               // go to previous page
               this.nav.pop();
           }
+        }  
       });
       
       if(this.platform.is("cordova"))

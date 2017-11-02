@@ -13,22 +13,72 @@
     
     
 <ion-content >
+    
     <ion-list>
         <ion-item>
-            <ion-label >상품명</ion-label>
-            <ion-input type="text" [(ngModel)]="goodsInfo.goods_nm"></ion-input>
+            <ion-label class="required">상품명</ion-label>
+            <ion-input type="text" #goods_nm required [(ngModel)]="goodsInfo.goods_nm"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label stacked>설명</ion-label>
-            <ion-textarea  [(ngModel)]="goodsInfo.mobile_detail_desc"></ion-textarea>
+                <table style="width:100%">
+                        <TR>
+                        <td class="thumnail_td">
+                          <div *ngIf="images.length>0">
+                            <img [src]="images[0]" class="thumnail" />
+                            <button ion-button icon-only clear color="danger" (click)="delImage(0)">
+                                <ion-icon name="md-close-circle"></ion-icon>
+                            </button>
+                          </div>    
+                        </td>    
+                        <td class="thumnail_td">
+                            <div *ngIf="images.length>1">
+                                <img [src]="images[1]" class="thumnail" />
+                                <button ion-button icon-only color="danger" clear (click)="delImage(1)">
+                                    <ion-icon name="md-close-circle"></ion-icon>
+                                </button>
+                            </div>    
+                        </td>    
+                        <td class="thumnail_td">
+                            <div *ngIf="images.length>2">
+                                <img [src]="images[2]" class="thumnail" />
+                                <button ion-button icon-only color="danger" clear (click)="delImage(2)">
+                                    <ion-icon name="md-close-circle"></ion-icon>
+                                </button>
+                            </div>    
+                        </td>    
+                        <td class="thumnail_td">
+                            <div *ngIf="images.length>3">
+                                <img [src]="images[3]" class="thumnail" />
+                                <button ion-button icon-only color="danger" clear (click)="delImage(3)">
+                                    <ion-icon name="md-close-circle"></ion-icon>
+                                </button>
+                            </div>    
+                        </td >    
+                        <td class="thumnail_td">
+                            <div *ngIf="images.length>4">
+                                <img [src]="images[4]" class="thumnail" />
+                                <button ion-button icon-only color="danger" clear (click)="delImage(4)">
+                                    <ion-icon name="md-close-circle"></ion-icon>
+                                </button>
+                            </div>    
+                        </td>    
+                        <td>
+                            <button ion-button color="primary" block (click)="showPictureSel()">사진등록</button>
+                        </td>
+                        </TR>
+                      </table>    
+        </ion-item>
+        <ion-item>
+            <ion-label stacked class="required">설명</ion-label>
+            <ion-textarea #detail_desc [(ngModel)]="goodsInfo.detail_desc"></ion-textarea>
         </ion-item>    
         <ion-item>
-                <ion-label >가격</ion-label>
-                <ion-input (keyup)="convert('delivery_amnt',$event)" type="tel" [(ngModel)]="goodsInfo.delivery_amnt"></ion-input>
+                <ion-label class="required">가격</ion-label>
+                <ion-input #sellprice (keyup)="convert('sellprice',$event)" type="tel" [(ngModel)]="goodsInfo.goods_opt_list[0].sellprice"></ion-input>
         </ion-item>    
         <ion-item>
-                <ion-label >수량</ion-label>
-                <ion-input type="tel" (keyup)="convert('max_order_cnt',$event)" [(ngModel)]="goodsInfo.max_order_cnt"></ion-input>
+                <ion-label class="required">수량</ion-label>
+                <ion-input #max_order_cnt required type="tel" (keyup)="convert('max_order_cnt',$event)" [(ngModel)]="goodsInfo.max_order_cnt"></ion-input>
         </ion-item>
         <ion-item>
                 <ion-label >주문마감일</ion-label>
@@ -47,18 +97,18 @@
         </ion-item>
         <ion-item>
                 <ion-label>교환 가능</ion-label>
-                <ion-checkbox></ion-checkbox>
+                <ion-checkbox [(ngModel)]="goodsInfo.refund_yn_b"></ion-checkbox>
             </ion-item>    
             <ion-item>    
                 <ion-label>환불 가능</ion-label>
-                <ion-checkbox></ion-checkbox>
+                <ion-checkbox  [(ngModel)]="goodsInfo.exchange_yn_b"></ion-checkbox>
             </ion-item>
     </ion-list>
     
-    
+    <button ion-button (click)="showRcmdSel()" >추천</button>
 </ion-content>
 <ion-footer >
-        <ion-toolbar color="primary">
+        <ion-toolbar color="primary" (click)="save()">
                 <ion-title>등록하기</ion-title>
         </ion-toolbar>
         

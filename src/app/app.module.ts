@@ -20,10 +20,16 @@ import { GoodsRegisterPage } from '../pages/goodsRegister/goodsRegister';
 import { FCM } from '@ionic-native/fcm';
 import { Contacts } from '@ionic-native/contacts';
 import { TextMaskModule } from 'angular2-text-mask';
+import { Camera } from '@ionic-native/camera'
+import { GoodsProvider } from '../providers/goods';
+import { ImagePicker } from '@ionic-native/image-picker';
+import { PictureSelPopup } from '../pages/popup/pictureSel';
+import { RcmdSelPopup } from '../pages/popup/rcmdSel';
+import { File } from '@ionic-native/file';
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,WebLoginPage,
+    HomePage,WebLoginPage,PictureSelPopup,RcmdSelPopup,
     ListPage, RegisterPage,GoodsRegisterPage
   ],
   imports: [
@@ -35,15 +41,15 @@ import { TextMaskModule } from 'angular2-text-mask';
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
+    MyApp,PictureSelPopup,RcmdSelPopup,
     HomePage,WebLoginPage,
     ListPage, RegisterPage,GoodsRegisterPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    RestProvider, FCM,
-    Sim,KakaoTalk,Device,StartProvider,Contacts,
+    RestProvider, FCM, File,
+    Sim,KakaoTalk,Device,StartProvider,Contacts, Camera, ImagePicker, GoodsProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -28,3 +28,7 @@
     background-color:  color($colors,head_title),
     
 }
+.required::after { 
+    content: "*";
+    color:  color($colors,primary);
+}
