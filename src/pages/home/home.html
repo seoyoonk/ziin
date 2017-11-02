@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
+    <button ion-button menuToggle color="primary">
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Home</ion-title>
@@ -33,11 +33,11 @@
     </button>
   </ion-list>
 </ion-content>
-<ion-footer class="test">
-  <ion-toolbar (click)="goGoodsRegister()" transparent>
-    <div class="divCenter">
-      <img class="homepageRcmdBtnIcon" src="assets/icon/btn_icon_product.png">
-      <span class="homepageRcmdBtnText">상품소개</span>
-    </div>
+<ion-footer >
+  <ion-toolbar (click)="goGoodsRegister()" color="primary">
+    
+     
+      <ion-title center><ion-icon name="add-circle"></ion-icon> 상품소개 하기</ion-title>
+    
   </ion-toolbar>
 </ion-footer>
