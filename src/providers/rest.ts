@@ -18,7 +18,7 @@ export class RestProvider {
 
   public userInfo = { mem_no:'', not_yet_read:0, mobile: '', mem_nm: '', email: '', mem_img: '', sns: '', sns_id: '', push_token: '' };
   public deviceInfo = { app_ver: this.app_ver, app_id: this.app_id, device_id: '', os_type: '', os_ver: '', auth_token: 'NO_HAS_APP_TOKEN' };
-  public config = {img_goods_root_path:''};
+  public config = {img_goods_root_path:'http://14.63.197.21:7070/resources/goods_image'};
   constructor(public http: Http, private loadingCtrl: LoadingController) {
 
   }

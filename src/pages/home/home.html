@@ -3,13 +3,20 @@
     <button ion-button menuToggle color="primary">
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title text-center>Home</ion-title>
+    <button ion-button float-right style="background-color: rgba( 255, 255, 255, 0 );">
+      <img style="width:3em;height:3em" src="assets/icon/btn_titlebar_notice.png">
+      <span style="color: black;" [hidden]="0 >= rest.userInfo.not_yet_read">{{rest.userInfo.not_yet_read}}</span>
+    </button>
   </ion-navbar>
 </ion-header>
 <ion-menu [content]="content">
   <ion-header>
     <ion-toolbar>
-      <ion-title>Menu</ion-title>
+        <ion-avatar item-start>
+          <img [src]="rest.userInfo.mem_img">
+        </ion-avatar><br>
+      <ion-title>{{rest.userInfo.mem_nm}}</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -28,44 +35,49 @@
   <ion-card *ngFor="let data of dataList" (click)="itemClicked(data)">
     <ion-item>
       <ion-avatar item-start>
-        <img class="homepageProducerImg" [src]="'http://14.63.197.21:7070/resources/goods_image' + data.producer_img">
+        <img [src]="data.rcmd_mem_img">
       </ion-avatar>
-      <h2>{{data.register_nm}}</h2>
-      <p>{{data.reg_dttm}}</p>
+      <h2>{{data.rcmd_mem_nm}}</h2>
+      <p>{{data.reg_dttm | date:'yyyy-MM-dd'}}
+        <span float-right>{{data.sale_end_dd}}</span>
+      </p>
     </ion-item>
 
     <ion-card-content>
-      <p>Your scientists were so preoccupied with whether or not they could, that they didn't stop to think if they should.</p>
+      <p>
+        <span class="goodsNm">{{data.goods_nm}}</span>
+        <span float-right>{{data.sellprice | number}}원</span>
+      </p>
     </ion-card-content>
-    <img class="homepageGoodsImg" [src]="'http://14.63.197.21:7070/resources/goods_image' + data.list_img_1">
+    <img [src]="rest.config.img_goods_root_path + data.list_img_1">
     <ion-row>
       <ion-col>
         <button ion-button color="primary" clear small icon-start>
           <ion-icon name='text'></ion-icon>
-          <span>댓글 {{data.comment_cnt}}</span>
+          <span>댓글 {{data.comment_cnt | number}}개</span>
         </button>
       </ion-col>
       <ion-col>
         <button ion-button color="primary" clear small icon-start>
           <ion-icon name='text'></ion-icon>
-          <span>주문 {{data.tot_sale_cnt}}</span>
+          <span>주문 {{data.tot_sale_cnt | number}}개</span>
         </button>
       </ion-col>
       <ion-col>
         <button ion-button color="primary" clear small icon-start>
           <ion-icon name='text'></ion-icon>
-          <span>재고수량 {{data.tot_stock_cnt}}</span>
+          <span>재고수량 {{data.tot_stock_cnt | number}}개</span>
         </button>
       </ion-col>
     </ion-row>
 
   </ion-card>
 </ion-content>
-<ion-footer >
+<ion-footer>
   <ion-toolbar (click)="goGoodsRegister()" color="primary">
-    
-     
-      <ion-title center><ion-icon name="add-circle"></ion-icon> 상품소개 하기</ion-title>
-    
+
+    <ion-title center>
+      <ion-icon name="add-circle"></ion-icon> 상품소개 하기</ion-title>
+
   </ion-toolbar>
 </ion-footer>

@@ -25,7 +25,6 @@ export class HomePage {
         alert("ERROR!: " + err);
       }
     );
-    this.dataList = [];
   }
 
   constructor(public navCtrl: NavController, private modalCtrl : ModalController, public rest : RestProvider) {
@@ -49,7 +48,7 @@ export class HomePage {
   }
 
   itemClicked(item:any){
-    this.dataList.push({idx:item.idx});
+    this.dataList.push(item);
   }
 
 }
