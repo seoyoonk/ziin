@@ -11,7 +11,8 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class RestProvider {
-  private apiUrl = 'http://192.168.0.17:8080';
+  //private apiUrl = 'http://192.168.0.17:8080';
+  private apiUrl = 'http://14.63.197.21:7070';
   public app_ver = "0.1";
   public app_id = "com.fliconz.ziin";
   loading;

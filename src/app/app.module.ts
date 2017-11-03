@@ -4,6 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { DetailPage } from '../pages/detail/detail';
 import { ListPage } from '../pages/list/list';
 import { RegisterPage } from '../pages/register/register';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -23,7 +24,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,WebLoginPage,
+    HomePage,WebLoginPage,DetailPage,
     ListPage, RegisterPage,GoodsRegisterPage
   ],
   imports: [
@@ -36,7 +37,7 @@ import { TextMaskModule } from 'angular2-text-mask';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,WebLoginPage,
+    HomePage,WebLoginPage,DetailPage,
     ListPage, RegisterPage,GoodsRegisterPage
   ],
   providers: [
