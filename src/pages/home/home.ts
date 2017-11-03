@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, NavController, ModalController } from 'ionic-angular';
 import { ListPage } from '../list/list';
+import { DetailPage } from '../detail/detail';
 import { GoodsRegisterPage } from '../goodsRegister/goodsRegister';
 import { RestProvider } from '../../providers/rest';
 
@@ -20,6 +21,10 @@ export class HomePage {
       res => {
         console.log(res);
         this.dataList = res.res_data.goods_list;
+        if(!this.rest.userInfo.mem_img){
+          this.rest.userInfo.mem_img = "assets/icon/abstract-user-flat-4.svg"
+        }
+        console.log(this.rest.userInfo)
       },
       err => {
         alert("ERROR!: " + err);
@@ -50,7 +55,7 @@ export class HomePage {
   }
 
   itemClicked(item:any){
-    this.dataList.push(item);
+    this.navCtrl.push(DetailPage);
   }
 
 }
