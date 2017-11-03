@@ -17,15 +17,22 @@ import { KakaoTalk } from 'ionic-plugin-kakaotalk';
 import { Device } from '@ionic-native/device';
 import { IonicStorageModule } from '@ionic/storage';
 import { WebLoginPage } from '../pages/webLogin/webLogin';
+import { ContactPickupPage } from '../pages/contactPickup/contactPickup';
 import { GoodsRegisterPage } from '../pages/goodsRegister/goodsRegister';
 import { FCM } from '@ionic-native/fcm';
 import { Contacts } from '@ionic-native/contacts';
 import { TextMaskModule } from 'angular2-text-mask';
+import { Camera } from '@ionic-native/camera'
+import { GoodsProvider } from '../providers/goods';
+import { ImagePicker } from '@ionic-native/image-picker';
+import { PictureSelPopup } from '../pages/popup/pictureSel';
+import { RcmdSelPopup } from '../pages/popup/rcmdSel';
+import { File } from '@ionic-native/file';
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,WebLoginPage,DetailPage,
-    ListPage, RegisterPage,GoodsRegisterPage
+    HomePage,WebLoginPage,PictureSelPopup,RcmdSelPopup,DetailPage,
+    ListPage, RegisterPage,GoodsRegisterPage,ContactPickupPage
   ],
   imports: [
     BrowserModule,
@@ -36,15 +43,15 @@ import { TextMaskModule } from 'angular2-text-mask';
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    HomePage,WebLoginPage,DetailPage,
+    MyApp,PictureSelPopup,RcmdSelPopup,DetailPage,
+    HomePage,WebLoginPage,ContactPickupPage,
     ListPage, RegisterPage,GoodsRegisterPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    RestProvider, FCM,
-    Sim,KakaoTalk,Device,StartProvider,Contacts,
+    RestProvider, FCM, File,
+    Sim,KakaoTalk,Device,StartProvider,Contacts, Camera, ImagePicker, GoodsProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -34,8 +34,10 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, private modalCtrl : ModalController, public rest : RestProvider) {
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
+      { title: '홈', component: HomePage , icon:'assets/icon/icon_menu_home.png'},
+      { title: '나의 주문', component: ListPage , icon:'assets/icon/icon_menu_order.png' },
+      { title: '판매관리', component: ListPage , icon:'assets/icon/icon_menu_saleMgt.png' },
+      { title: '설정', component: ListPage , icon:'assets/icon/icon_menu_setting.png' }
     ];
 
   }

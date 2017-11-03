@@ -1,31 +1,41 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle color="primary">
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title text-center>Home</ion-title>
-    <button ion-button float-right style="background-color: rgba( 255, 255, 255, 0 );">
-      <img style="width:3em;height:3em" src="assets/icon/btn_titlebar_notice.png">
-      <span style="color: black;" [hidden]="0 >= rest.userInfo.not_yet_read">{{rest.userInfo.not_yet_read}}</span>
-    </button>
-  </ion-navbar>
+ 
+
+  <ion-toolbar >
+
+      <ion-buttons left>
+        <button ion-button menuToggle color="primary">
+            <ion-icon name="menu"></ion-icon>
+        </button>
+      </ion-buttons>
+      <ion-title text-center>
+      <img src="assets/icon/titlebar_logo.png" alt="지인마켓" style="width:7em"/>
+      </ion-title>
+      <ion-buttons end>
+        <button ion-button icon-only  color="primary">
+          <ion-icon name="notifications"></ion-icon>
+          <ion-badge color="danger" [hidden]="0 >= rest.userInfo.not_yet_read">{{rest.userInfo.not_yet_read}}</ion-badge>
+          
+        </button>
+      </ion-buttons>
+  
+    </ion-toolbar>
 </ion-header>
 <ion-menu [content]="content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-item>
-        <ion-avatar>
-          <img [src]="rest.userInfo.mem_img">
-        </ion-avatar><br>
-      <ion-title>{{rest.userInfo.mem_nm}}</ion-title>
-    </ion-item>
+  <ion-header >
+    <ion-toolbar  >
+      <div class="profileImg">
+        <img [src]="rest.userInfo.mem_img" />
+        <div class="title">{{rest.userInfo.mem_nm}}</div>
+      </div>  
+      
     </ion-toolbar>
   </ion-header>
 
   <ion-content>
-    <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
+    <ion-list no-lines class="menu-list">
+      <button menuClose color="menu"  ion-item *ngFor="let p of pages" (click)="openPage(p)">
+        <img [src]="p.icon" class="icon" /> {{p.title}}
       </button>
     </ion-list>
   </ion-content>

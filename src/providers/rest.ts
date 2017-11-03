@@ -11,17 +11,29 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class RestProvider {
-  //private apiUrl = 'http://192.168.0.17:8080';
-  private apiUrl = 'http://14.63.197.21:7070';
+  public apiUrl = 'http://192.168.0.17:8080';
   public app_ver = "0.1";
   public app_id = "com.fliconz.ziin";
   loading;
 
   public userInfo = { mem_no:'', not_yet_read:0, mobile: '', mem_nm: '', email: '', mem_img: '', sns: '', sns_id: '', push_token: '' };
   public deviceInfo = { app_ver: this.app_ver, app_id: this.app_id, device_id: '', os_type: '', os_ver: '', auth_token: 'NO_HAS_APP_TOKEN' };
-  public config = {img_goods_root_path:'http://14.63.197.21:7070/resources/goods_image'};
+  public config = {img_goods_root_path:''};
+  
+
   constructor(public http: Http, private loadingCtrl: LoadingController) {
 
+  }
+  insertGoods(isNew:boolean, goodsInfo)
+  {
+    if(isNew)
+    {
+      return this.post('/api/goods/insertGoods.do', goodsInfo).map(res => res.json());
+    }
+    else
+    {
+      return this.post('/api/goods/updateGoods.do', goodsInfo).map(res => res.json());
+    }
   }
   login(loginInfo) {
 
@@ -33,6 +45,8 @@ export class RestProvider {
         this.deviceInfo.auth_token = res_data.auth_token;
         this.userInfo.email = res_data.email;
         this.userInfo.mem_no= res_data.mem_no;
+        this.userInfo.mem_img= res_data.mem_img;
+        this.userInfo.mem_nm= res_data.mem_nm;
         this.userInfo.not_yet_read= res_data.not_yet_read;
         this.config.img_goods_root_path = res_data.img_goods_root_path;
         return res.json();
@@ -62,13 +76,16 @@ export class RestProvider {
             let res_data = res.json().res_data;
             this.deviceInfo.auth_token = res.headers.get('auth_token');
             this.userInfo.mem_no= res_data.mem_no;
+            this.userInfo.mem_img= res_data.mem_img;
+            this.userInfo.mem_nm= res_data.mem_nm;
             this.userInfo.not_yet_read= res_data.not_yet_read;
             this.config.img_goods_root_path = res_data.img_goods_root_path;
           } 
           return { result_code: 0 };
         }
         else {
-          alert(res.headers.get('x-auth-result'));
+          this.deviceInfo.auth_token = "NO_HAS_APP_TOKEN";
+          alert("다른 곳에서 로긴하셨습니다. 다시 로그인 합니다.");
           return { result_code: -2 }; // auth fail
         }
 
