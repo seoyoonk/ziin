@@ -75,9 +75,13 @@ export class StartProvider {
       if (val == null) {
         console.log("ziin: auth_token is null");
         this.sim.requestReadPermission();
-        this.getFCMToken();
-        this.getPhoneNumber();
-        this.kakaoLogin();
+        if(!this.donePushToken) this.getFCMToken();
+        if(!this.donePhone) this.getPhoneNumber();
+        if(!this.doneSNSLogin) this.kakaoLogin();
+        if(this.donePhone && this.donePushToken && this.doneSNSLogin)
+        {
+          this.appStart(false);
+        }
 
       }
       else {
@@ -128,6 +132,15 @@ export class StartProvider {
           else if (res.result_code == -2)  // 로그인 실패
           {
             this.storage.remove('auth_token');
+            if(this.rest.userInfo.email=='')
+            {
+              this.doneSNSLogin = false;
+            }
+            if(this.rest.userInfo.mobile=='')
+            {
+              this.donePhone = false;
+              this.donePushToken=false;
+            }
             this.onStart(this.splashScreen);
           }
           else // 존재하지 않는 사용자

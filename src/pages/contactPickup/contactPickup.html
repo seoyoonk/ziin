@@ -1,0 +1,24 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>추천할 사람 선택</ion-title>
+    </ion-navbar>
+    
+</ion-header>
+  
+<ion-content>
+    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+    <ion-list>
+        <ion-item *ngFor="let item of contactList">
+            
+            <ion-label> {{item.name}}</ion-label>
+            <ion-checkbox [(ngModel)]="item.checked"></ion-checkbox>
+            
+        </ion-item>    
+    </ion-list>
+</ion-content>  
+<ion-footer >
+        <ion-toolbar color="primary" (click)="save()">
+                <ion-title>확인</ion-title>
+        </ion-toolbar>
+</ion-footer>    
+  

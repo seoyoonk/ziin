@@ -22,10 +22,16 @@
 {
     color : color($colors,primary)
 }
+
 .app-root .header .toolbar-background
 {
     
-    background-color:  color($colors,head_title),
+    background-color:  color($colors,head_title) 
+    
+}
+.menu-inner .toolbar-background
+{
+    background-color : color($colors,primary) !important;
     
 }
 .required::after { 

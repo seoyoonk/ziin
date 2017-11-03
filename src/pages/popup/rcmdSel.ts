@@ -1,8 +1,9 @@
 import { Component} from '@angular/core';
-import { ViewController, NavParams } from 'ionic-angular';
-import { Contacts,ContactFindOptions } from '@ionic-native/contacts'
+import { ViewController, NavParams, ModalController } from 'ionic-angular';
+
 import { KakaoTalk } from 'ionic-plugin-kakaotalk';
 import { RestProvider } from '../../providers/rest'; 
+import { ContactPickupPage } from '../contactPickup/contactPickup';
 @Component({
     template: `
       
@@ -24,9 +25,16 @@ import { RestProvider } from '../../providers/rest';
     reason;
     target="kakao";
     
-    constructor(public viewCtrl: ViewController, private contacts: Contacts, private kakao:KakaoTalk, private rest:RestProvider, private navParam:NavParams) {
+    constructor(public viewCtrl: ViewController,  private kakao:KakaoTalk, private rest:RestProvider, private navParam:NavParams, private modalCtrl:ModalController) {
         
     }
+    goContactPickup(){
+        let modal = this.modalCtrl.create(ContactPickupPage);
+        modal.present();
+        modal.onDidDismiss((data) => {
+          console.log('ziin: afterGoodsRegister ' + JSON.stringify(data));
+        });
+      }
     run()
     {
         if(this.target=="kakao")
@@ -39,29 +47,7 @@ import { RestProvider } from '../../providers/rest';
     }
     shareContact()
     {
-        let options = new ContactFindOptions();
-       
-        options.multiple = true;
-        let mobiles = [];
-        this.contacts.find(['*'],options).then(
-            (data)=>{
-                for(let i=0; i < data.length; i++)
-                {
-                    var arr = data[i].phoneNumbers;
-                    arr.forEach((value, index) => {
-                        if(value.value.startsWith("010"))
-                        {
-                            mobiles.push(value.value);
-                        }
-    
-                    })
-                }
-                alert(mobiles);
-            },
-            (err) =>
-            {
-            }
-        );
+        this.goContactPickup();
     }
     shareKakao()
     {

@@ -16,6 +16,7 @@ import { KakaoTalk } from 'ionic-plugin-kakaotalk';
 import { Device } from '@ionic-native/device';
 import { IonicStorageModule } from '@ionic/storage';
 import { WebLoginPage } from '../pages/webLogin/webLogin';
+import { ContactPickupPage } from '../pages/contactPickup/contactPickup';
 import { GoodsRegisterPage } from '../pages/goodsRegister/goodsRegister';
 import { FCM } from '@ionic-native/fcm';
 import { Contacts } from '@ionic-native/contacts';
@@ -30,7 +31,7 @@ import { File } from '@ionic-native/file';
   declarations: [
     MyApp,
     HomePage,WebLoginPage,PictureSelPopup,RcmdSelPopup,
-    ListPage, RegisterPage,GoodsRegisterPage
+    ListPage, RegisterPage,GoodsRegisterPage,ContactPickupPage
   ],
   imports: [
     BrowserModule,
@@ -42,7 +43,7 @@ import { File } from '@ionic-native/file';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,PictureSelPopup,RcmdSelPopup,
-    HomePage,WebLoginPage,
+    HomePage,WebLoginPage,ContactPickupPage,
     ListPage, RegisterPage,GoodsRegisterPage
   ],
   providers: [

@@ -5,7 +5,8 @@ import { RestProvider } from '../../providers/rest';
 import { GoodsProvider } from '../../providers/goods';
 import { PictureSelPopup } from '../popup/pictureSel';
 import { RcmdSelPopup } from '../popup/rcmdSel';
-import { Contacts } from '@ionic-native/contacts'
+import { Contacts } from '@ionic-native/contacts';
+
 @Component({
   selector: 'page-goodsRegister',
   templateUrl: 'goodsRegister.html'
@@ -118,7 +119,7 @@ export class GoodsRegisterPage {
         }
 
         let idx:number = 0;
-        this.rest.showLoading("등록 중");
+        this.rest.showLoading("저장 중입니다...");
         for (var i = 0; i < this.images.length; i++) {
             let pos : number = this.images[i].lastIndexOf("/");
             let path : string = this.images[i].substring(0, pos);
