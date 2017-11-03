@@ -16,7 +16,7 @@ export class RestProvider {
   public app_id = "com.fliconz.ziin";
   loading;
 
-  public userInfo = { mem_no:'', not_yet_read:0, mobile: '', mem_nm: '', email: '', mem_img: '', sns: '', sns_id: '', push_token: '' };
+  public userInfo = {auth_result:0, mem_no:'', not_yet_read:0, mobile: '', mem_nm: '', email: '', mem_img: '', sns: '', sns_id: '', push_token: '' };
   public deviceInfo = { app_ver: this.app_ver, app_id: this.app_id, device_id: '', os_type: '', os_ver: '', auth_token: 'NO_HAS_APP_TOKEN' };
   public config = {img_goods_root_path:''};
   
@@ -28,11 +28,11 @@ export class RestProvider {
   {
     if(isNew)
     {
-      return this.post('/api/goods/insertGoods.do', goodsInfo).map(res => res.json());
+      return this.post('/api/goods/insertGoods.do', goodsInfo);
     }
     else
     {
-      return this.post('/api/goods/updateGoods.do', goodsInfo).map(res => res.json());
+      return this.post('/api/goods/updateGoods.do', goodsInfo);
     }
   }
   login(loginInfo) {
@@ -41,15 +41,15 @@ export class RestProvider {
       {
         this.deviceInfo.device_id="fc85bf4b81491385";
         
-        let res_data = res.json().res_data;
-        this.deviceInfo.auth_token = res_data.auth_token;
+        let res_data = res.res_data;
+        
         this.userInfo.email = res_data.email;
         this.userInfo.mem_no= res_data.mem_no;
         this.userInfo.mem_img= res_data.mem_img;
         this.userInfo.mem_nm= res_data.mem_nm;
         this.userInfo.not_yet_read= res_data.not_yet_read;
         this.config.img_goods_root_path = res_data.img_goods_root_path;
-        return res.json();
+        return res;
       } );
   }
   showLoading(msg) {
@@ -61,35 +61,37 @@ export class RestProvider {
   closeLoading() {
     if (this.loading != null) this.loading.dismiss();
   }
+  processAfterPost()
+  {
+
+  }
   appStart() {
 
     let response = this.post("/api/appStart.do", this.userInfo);
     return response.map(
       (res) => {
-        alert(JSON.stringify(res.headers)); // Print http header
-        if (res.headers.get("x-auth-result") == 'not_found_user') {
-          return { result_code: -1 };
-        }
-        else if (res.headers.get('x-auth-result') == 'auth_success') {
-          if(res.headers.get('auth_token') != null)
-          {
-            let res_data = res.json().res_data;
-            this.deviceInfo.auth_token = res.headers.get('auth_token');
-            this.userInfo.mem_no= res_data.mem_no;
-            this.userInfo.mem_img= res_data.mem_img;
-            this.userInfo.mem_nm= res_data.mem_nm;
-            this.userInfo.not_yet_read= res_data.not_yet_read;
-            this.config.img_goods_root_path = res_data.img_goods_root_path;
+        let result_code = this.userInfo.auth_result;
+        if(result_code==0)
+        {
+            
+            let res_data = res.res_data;
+            if(res_data.mem_no != null)
+            {
+              this.userInfo.mem_no= res_data.mem_no;
+              this.userInfo.mem_img= res_data.mem_img;
+              this.userInfo.mem_nm= res_data.mem_nm;
+              this.userInfo.not_yet_read= res_data.not_yet_read;
+              this.config.img_goods_root_path = res_data.img_goods_root_path;
+            }
           } 
-          return { result_code: 0 };
+          else if(result_code == -1)
+          {
+            this.deviceInfo.auth_token = "NO_HAS_APP_TOKEN";
+            alert("다른 곳에서 로긴하셨습니다. 다시 로그인 합니다.");
+          }
+          return { result_code: result_code };
         }
-        else {
-          this.deviceInfo.auth_token = "NO_HAS_APP_TOKEN";
-          alert("다른 곳에서 로긴하셨습니다. 다시 로그인 합니다.");
-          return { result_code: -2 }; // auth fail
-        }
-
-      }
+       
 
     )
 
@@ -117,9 +119,29 @@ export class RestProvider {
     console.log("ziin: " + url);
     let param: any = new Object();
     param.req_data = param1;
-    let res = this.http.post(this.apiUrl + url, param, { headers: headers });
+    return this.http.post(this.apiUrl + url, param, { headers: headers }).map(
+      (res)=>{
+          console.log(res);
+          if (res.headers.get("x-auth-result") == 'not_found_user') {
+              this.userInfo.auth_result = -2;
+          }
+          else if (res.headers.get('x-auth-result') == 'auth_success') {    
+            this.userInfo.auth_result = 0;
+            if(res.headers.get('auth_token') != null)
+            {
+              
+              this.deviceInfo.auth_token = res.headers.get('auth_token');
+            }
+          }
+          else
+          {
+            this.userInfo.auth_result = -1;
+          }
+          return res.json();
+        }
+      ) ;
     
-    return res;
+    
   }
   private get(url)
   {
@@ -134,27 +156,15 @@ export class RestProvider {
     return res;
   }
   insertMember() {
-    return this.post("/api/member/insertMember.do", this.userInfo).map(
-      (res) => {
-        this.deviceInfo.auth_token = res.headers.get('auth_token');
-        return res.json();
-      }
-    );
+    return this.post("/api/member/insertMember.do", this.userInfo);
   }
 
   getDeliveryList(kubun: string) {
-    var response = this.http.get("http://192.168.0.17:8090/test/deliveryList.jsp").map(res => res.json());
+    var response = this.http.get("http://192.168.0.17:8090/test/deliveryList.jsp");
     return response;
   }
-  sendLocation(lat: number, lng: number) {
-    var url: string = "http://192.168.0.17:8090/test/sendLocation.jsp?lat=" + lat + "&lng=" + lng;
-    var response = this.http.get(url).map(res => res.json());
-    return response;
-  }
+
   selectListGoodsRcmd() {
-    return this.post("/api/goodsRcmd/selectListGoodsRcmd.do",{page_no:1, row_count:100}).map(
-      (res) => {
-        return res.json();
-      });
+    return this.post("/api/goodsRcmd/selectListGoodsRcmd.do",{page_no:1, row_count:100});
   }
 }
