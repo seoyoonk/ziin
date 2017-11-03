@@ -85,6 +85,7 @@ export class RestProvider {
         }
         else {
           this.deviceInfo.auth_token = "NO_HAS_APP_TOKEN";
+          alert("다른 곳에서 로긴하셨습니다. 다시 로그인 합니다.");
           return { result_code: -2 }; // auth fail
         }
 

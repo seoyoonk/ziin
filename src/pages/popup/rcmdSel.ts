@@ -77,6 +77,7 @@ import { RestProvider } from '../../providers/rest';
               text : '상품 상세 페이지로 이동'
             }
         };    
+        
         this.kakao.share(options).then((data)=>{
             alert(JSON.stringify(data));
         }, 

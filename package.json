@@ -40,8 +40,8 @@
         "cordova-plugin-device": "^1.1.4",
         "cordova-plugin-fcm": "^2.1.2",
         "cordova-plugin-file": "^4.3.3",
+        "cordova-plugin-ghyeok-kakaotalk": "git+https://github.com/seoyoonk/KakaoTalkCordovaPlugin.git",
         "cordova-plugin-ionic-webview": "^1.1.16",
-        "cordova-plugin-kakaotalk": "git+https://github.com/seoyoonk/KakaoTalkCordovaPlugin.git",
         "cordova-plugin-sim": "^1.3.3",
         "cordova-plugin-splashscreen": "^4.0.3",
         "cordova-plugin-telerik-imagepicker": "^2.1.8",
@@ -77,7 +77,7 @@
                 "PHOTO_LIBRARY_USAGE_DESCRIPTION": "상품사진 선택"
             },
             "cordova-plugin-file": {},
-            "cordova-plugin-kakaotalk": {
+            "cordova-plugin-ghyeok-kakaotalk": {
                 "KAKAO_APP_KEY": "7b17e484158c144531e814fbf09ffa60"
             }
         },
