@@ -1,23 +1,56 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>List</ion-title>
-  </ion-navbar>
-</ion-header>
-
-<ion-content>
-  <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <ion-icon [name]="item.icon" item-start></ion-icon>
-      {{item.title}}
-      <div class="item-note" item-end>
-        {{item.note}}
-      </div>
-    </button>
-  </ion-list>
-  <div *ngIf="selectedItem" padding>
-    You navigated here from <b>{{selectedItem.title}}</b>
-  </div>
-</ion-content>
+    <ion-navbar>
+    </ion-navbar>
+  </ion-header>
+    <ion-content class="cards-bg social-cards">
+    
+      <ion-card *ngFor="let data of dataList" (click)="itemClicked(data)">
+        <ion-item>
+          <ion-avatar item-start>
+            <img [src]="data.rcmd_mem_img">
+          </ion-avatar>
+          <h2>{{data.rcmd_mem_nm}}
+              <span float-right><img></span></h2>
+          <p>{{data.reg_dttm | date:'yyyy-MM-dd'}}
+            <span float-right>{{data.sale_end_dd}}</span>
+          </p>
+        </ion-item>
+    
+        <ion-card-content>
+          <p>
+            <span class="goodsNm">{{data.goods_nm}}</span>
+            <span float-right>{{data.sellprice | number}}원</span>
+          </p>
+        </ion-card-content>
+        <img [src]="rest.config.img_goods_root_path + data.list_img_1">
+        <ion-row>
+          <ion-col>
+            <button ion-button color="primary" clear small icon-start>
+              <ion-icon name='text'></ion-icon>
+              <span>댓글 {{data.comment_cnt | number}}개</span>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button color="primary" clear small icon-start>
+              <ion-icon name='text'></ion-icon>
+              <span>주문 {{data.tot_sale_cnt | number}}개</span>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button color="primary" clear small icon-start>
+              <ion-icon name='text'></ion-icon>
+              <span>재고수량 {{data.tot_stock_cnt | number}}개</span>
+            </button>
+          </ion-col>
+        </ion-row>
+    
+      </ion-card>
+  </ion-content>
+  <ion-footer>
+      <ion-toolbar (click)="goGoodsRegister()" color="primary">
+    
+        <ion-title center>
+          <ion-icon name="add-circle"></ion-icon> 상품소개 하기</ion-title>
+    
+      </ion-toolbar>
+  </ion-footer>

@@ -112,43 +112,48 @@ export class StartProvider {
     });
 
   }
+  onAfterStart(res)
+  {
+    if (res.result_code == 0)  // 로그인 성공
+    {
+
+      this.storage.set("auth_token", this.rest.deviceInfo.auth_token);
+      this.goHome();
+    }
+    else if (res.result_code == -2)  // 로그인 실패
+    {
+      this.storage.remove('auth_token');
+      if(this.rest.userInfo.email=='')
+      {
+        this.doneSNSLogin = false;
+      }
+      if(this.rest.userInfo.mobile=='')
+      {
+        this.donePhone = false;
+        this.donePushToken=false;
+      }
+      this.onStart(this.splashScreen);
+    }
+    else // 존재하지 않는 사용자
+    {
+
+      this.goRegister();
+
+    }
+  }
   appStart(isNew: boolean) {
 
     if (this.doneSNSLogin && this.donePhone && this.donePushToken) {
       if (!isNew) {
 
         this.rest.showLoading("로그인 중입니다.");
+
       }
       
       this.rest.appStart().subscribe(
         res => {
           this.rest.closeLoading();
-          if (res.result_code == 0)  // 로그인 성공
-          {
-
-            this.storage.set("auth_token", this.rest.deviceInfo.auth_token);
-            this.goHome();
-          }
-          else if (res.result_code == -2)  // 로그인 실패
-          {
-            this.storage.remove('auth_token');
-            if(this.rest.userInfo.email=='')
-            {
-              this.doneSNSLogin = false;
-            }
-            if(this.rest.userInfo.mobile=='')
-            {
-              this.donePhone = false;
-              this.donePushToken=false;
-            }
-            this.onStart(this.splashScreen);
-          }
-          else // 존재하지 않는 사용자
-          {
-
-            this.goRegister();
-
-          }
+          this.onAfterStart(res);
         },
         err => {
           this.rest.closeLoading();
