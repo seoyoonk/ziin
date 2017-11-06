@@ -15,7 +15,7 @@
             <ion-avatar item-start>
                 <img [src]="c.mem_img">
             </ion-avatar>
-            {{c.mem_nm}} {{c.content}} {{c.reg_dttm | date:'yyyy-MM-dd'}}
+            {{c.reg_mem_nm}} {{c.content}} {{c.reg_dttm | date:'yyyy-MM-dd'}}
             <span [hidden]="c.eval_score == null">구매평가{{c.eval_score}}</span>
             <button>댓글달기</button>
         </ion-item>
