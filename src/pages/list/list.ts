@@ -3,6 +3,7 @@ import { NavController, NavParams,ModalController } from 'ionic-angular';
 import { GoodsRegisterPage } from '../goodsRegister/goodsRegister';
 import { RestProvider } from '../../providers/rest';
 import { DetailPage } from '../detail/detail';
+import { CommentPage } from '../comment/comment';
 @Component({
   selector: 'page-list',
   templateUrl: 'list.html'
@@ -22,7 +23,12 @@ export class ListPage {
       console.log('ziin: afterGoodsRegister ' + JSON.stringify(data));
     });
   }
+  goComment(data)
+  {
+    let modal = this.modalCtrl.create(CommentPage, {goosd_no : data.goods_no});
+    modal.present();
 
+  }
   itemClicked(item:any){
     let modal = this.modalCtrl.create(DetailPage,item);
     modal.present(); 

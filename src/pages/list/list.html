@@ -4,28 +4,29 @@
   </ion-header>
     <ion-content class="cards-bg social-cards">
     
-      <ion-card *ngFor="let data of dataList" (click)="itemClicked(data)">
+      <ion-card *ngFor="let data of dataList" >
         <ion-item>
           <ion-avatar item-start>
             <img [src]="data.rcmd_mem_img">
           </ion-avatar>
           <h2>{{data.rcmd_mem_nm}}
               <span float-right><img></span></h2>
-          <p>{{data.reg_dttm | date:'yyyy-MM-dd'}} 추천
+          <p>{{data.rcmd_dttm | date:'yyyy-MM-dd'}} <span [hidden]="data.rcmd_mem_no == null">추천</span><span [hidden]="data.rcmd_mem_no != null">소개</span>
             <span float-right>{{data.sale_end_dd}} 마감예정</span>
           </p>
         </ion-item>
     
-        <ion-card-content>
+        <ion-card-content (click)="itemClicked(data)">
           <p>
             <span class="goodsNm">{{data.goods_nm}}</span>
             <span float-right><span class="goodsNm">{{data.sellprice | number}}</span>원</span>
           </p>
+          <img [src]="rest.config.img_goods_root_path + data.list_img_1">
         </ion-card-content>
-        <img [src]="rest.config.img_goods_root_path + data.list_img_1">
+        
         <ion-row>
           <ion-col>
-            <button ion-button color="primary" clear small icon-start>
+            <button ion-button color="primary" clear small icon-start (click)="goComment(data)">
               <ion-icon name='text'></ion-icon>
               <span>댓글 {{data.comment_cnt | number}}개</span>
             </button>
@@ -39,7 +40,7 @@
           <ion-col>
             <button ion-button color="primary" clear small icon-start>
               <ion-icon name='basket'></ion-icon>
-              <span>재고수량 {{data.tot_stock_cnt | number}}개</span>
+              <span>재고 {{data.tot_stock_cnt | number}}개</span>
             </button>
           </ion-col>
         </ion-row>
