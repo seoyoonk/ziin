@@ -24,7 +24,8 @@ export class ListPage {
   }
 
   itemClicked(item:any){
-    this.navCtrl.push(DetailPage);
+    let modal = this.modalCtrl.create(DetailPage,item);
+    modal.present(); 
   }
 
   ionViewDidLoad(){
