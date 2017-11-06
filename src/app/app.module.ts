@@ -34,7 +34,7 @@ import { ZNScoreComponent } from '../comp/score';
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,WebLoginPage,PictureSelPopup,RcmdSelPopup,DetailPage,
+    HomePage,WebLoginPage,PictureSelPopup,RcmdSelPopup,DetailPage,OrderPage,
     ListPage, RegisterPage,GoodsRegisterPage,ContactPickupPage,CommentPage,ZNScoreComponent, OrderPage
   ],
   imports: [
