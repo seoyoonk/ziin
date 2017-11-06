@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { DetailPage } from '../pages/detail/detail';
 import { ListPage } from '../pages/list/list';
 import { RegisterPage } from '../pages/register/register';
+import { OrderPage } from '../pages/order/order';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { RestProvider } from '../providers/rest';
@@ -45,7 +46,7 @@ import { ZNScoreComponent } from '../comp/score';
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,PictureSelPopup,RcmdSelPopup,DetailPage,
+    MyApp,PictureSelPopup,RcmdSelPopup,DetailPage,OrderPage,
     HomePage,WebLoginPage,ContactPickupPage,CommentPage,
     ListPage, RegisterPage,GoodsRegisterPage
   ],
