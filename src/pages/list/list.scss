@@ -3,6 +3,13 @@ page-list {
         font-weight: bold;
         font-size: 1.5em;
     }
+    .zn-score-area
+    {
+        color : color($colors,primary);
+        float : right;
+        font-size: 0.8em;
+    }
+    
     .scroll-content
     {
         background-color: #eaeaea

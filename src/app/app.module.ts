@@ -30,11 +30,12 @@ import { ImagePicker } from '@ionic-native/image-picker';
 import { PictureSelPopup } from '../pages/popup/pictureSel';
 import { RcmdSelPopup } from '../pages/popup/rcmdSel';
 import { File } from '@ionic-native/file';
+import { ZNScoreComponent } from '../comp/score';
 @NgModule({
   declarations: [
     MyApp,
     HomePage,WebLoginPage,PictureSelPopup,RcmdSelPopup,DetailPage,OrderPage,
-    ListPage, RegisterPage,GoodsRegisterPage,ContactPickupPage,CommentPage
+    ListPage, RegisterPage,GoodsRegisterPage,ContactPickupPage,CommentPage,ZNScoreComponent, OrderPage
   ],
   imports: [
     BrowserModule,
@@ -47,7 +48,7 @@ import { File } from '@ionic-native/file';
   entryComponents: [
     MyApp,PictureSelPopup,RcmdSelPopup,DetailPage,OrderPage,
     HomePage,WebLoginPage,ContactPickupPage,CommentPage,
-    ListPage, RegisterPage,GoodsRegisterPage
+    ListPage, RegisterPage,GoodsRegisterPage, OrderPage
   ],
   providers: [
     StatusBar,

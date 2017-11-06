@@ -3,8 +3,7 @@
         <ion-title text-center>댓글</ion-title>
         <ion-buttons start>
             <button ion-button (click)="dismiss()">
-                <span ion-text color="primary">Cancel</span>
-                <ion-icon name="md-close"></ion-icon>
+                <ion-icon name="close"></ion-icon>
             </button>
         </ion-buttons>
     </ion-navbar>
@@ -16,7 +15,7 @@
             <ion-avatar item-start>
                 <img [src]="c.mem_img">
             </ion-avatar>
-            {{c.mem_nm}} {{c.comment}} {{c.reg_dttm | date:'yyyy-MM-dd'}}
+            {{c.mem_nm}} {{c.content}} {{c.reg_dttm | date:'yyyy-MM-dd'}}
             <span [hidden]="c.eval_score == null">구매평가{{c.eval_score}}</span>
             <button>댓글달기</button>
         </ion-item>
@@ -24,9 +23,9 @@
 </ion-content>
 <ion-footer>
     <ion-toolbar color="primary">
-        <ion-input placeholder="댓글을 입력하세요"></ion-input>
+        <ion-input placeholder="댓글을 입력하세요" [(ngModel)]="data.content"></ion-input>
         <ion-buttons end>
-            <button ion-button icon-only>
+            <button ion-button icon-only (click)="save()">
                 <ion-icon name="send"></ion-icon>
             </button>
         </ion-buttons>

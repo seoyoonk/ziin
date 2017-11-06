@@ -9,10 +9,13 @@
           <ion-avatar item-start>
             <img [src]="data.rcmd_mem_img">
           </ion-avatar>
+          <zn-score score="{{data.eval_avg_score}}"></zn-score>
+          
           <h2>{{data.rcmd_mem_nm}}
               <span float-right><img></span></h2>
+              
           <p>{{data.rcmd_dttm | date:'yyyy-MM-dd'}} <span [hidden]="data.rcmd_mem_no == null">추천</span><span [hidden]="data.rcmd_mem_no != null">소개</span>
-            <span float-right>{{data.sale_end_dd}} 마감예정</span>
+            <span float-right>{{data.sale_end_dd}} 마감</span>
           </p>
         </ion-item>
     
@@ -28,19 +31,19 @@
           <ion-col>
             <button ion-button color="primary" clear small icon-start (click)="goComment(data)">
               <ion-icon name='text'></ion-icon>
-              <span>댓글 {{data.comment_cnt | number}}개</span>
+              <span>댓글 {{data.comment_cnt | number}}</span>
             </button>
           </ion-col>
           <ion-col>
             <button ion-button color="primary" clear small icon-start>
               <ion-icon name='cart'></ion-icon>
-              <span>주문 {{data.tot_sale_cnt | number}}개</span>
+              <span>주문 {{data.tot_sale_cnt | number}}</span>
             </button>
           </ion-col>
           <ion-col>
             <button ion-button color="primary" clear small icon-start>
               <ion-icon name='basket'></ion-icon>
-              <span>재고 {{data.tot_stock_cnt | number}}개</span>
+              <span>재고 {{data.tot_stock_cnt | number}}</span>
             </button>
           </ion-col>
         </ion-row>

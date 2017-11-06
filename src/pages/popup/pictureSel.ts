@@ -20,7 +20,8 @@ import { ImagePicker } from '@ionic-native/image-picker';
     {
       let options = {
         maximumImagesCount: 10,
-        width: 800
+        width: 800,
+        quality:50
       };
       this.imagePicker.getPictures(options).then((results) => {
         for (var i = 0; i < results.length; i++) {
@@ -36,7 +37,7 @@ import { ImagePicker } from '@ionic-native/image-picker';
     goCamera()
     {
         const options: CameraOptions = {
-            quality: 100,
+            quality: 50,
             destinationType: this.camera.DestinationType.FILE_URI,
             encodingType: this.camera.EncodingType.JPEG,
             mediaType: this.camera.MediaType.PICTURE
