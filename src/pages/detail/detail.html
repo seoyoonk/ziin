@@ -1,13 +1,86 @@
 <ion-header>
   <ion-navbar>
-    <ion-title text-center>Home</ion-title>
+    <ion-title text-center>{{params.data.goods_nm}} 상세</ion-title>
+    <ion-buttons start>
+        <button ion-button (click)="dismiss()">
+        <span ion-text color="primary" showWhen="ios">Cancel</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+        </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-<ion-item>
-  <ion-avatar>
-    <img>
-  </ion-avatar>
-</ion-item>
+ 
+  <ion-item>
+    <ion-avatar item-start>
+      <img [src]="rest.userInfo.mem_img">
+    </ion-avatar>
+    <h2>{{data.register_nm}} 
+        <span float-right><img></span></h2>
+    <p>{{data.reg_dttm | date:'yyyy-MM-dd'}} 소개
+      <span float-right>{{data.sale_end_dd}} 마감</span>
+    </p>
+  </ion-item>
+
+  <ion-card-content>
+    <p>
+      <span class="goodsNm">{{data.goods_nm}}</span>
+      <span float-right>{{data.goods_opt_list[0].sellprice | number}}원</span>
+      
+    </p>
+    <div>{{data.detail_desc}}</div>
+  </ion-card-content>
+  
+  <div *ngFor="let i of data.detail_img_list">
+    <img  [src]="rest.config.img_goods_root_path + i" />
+  </div>
+ 
+      
+      
+  <ion-row>
+    <ion-col>   
+      <ion-icon name='person'></ion-icon> 
+      <span>생산자 {{data.producer_nm}}</span>
+    </ion-col> 
+    <ion-col>
+       
+        <ion-icon name='cart'></ion-icon>
+        <span>주문 {{data.tot_sale_cnt | number}}개</span>
+      
+    </ion-col>
+    <ion-col>
+      
+        <ion-icon name='basket'></ion-icon>
+        <span>재고 {{data.tot_stock_cnt | number}}개</span>
+      
+    </ion-col>
+  </ion-row>
+   
+ 
+ 
+
 </ion-content>
+<ion-footer>
+    <ion-toolbar color="primary" >
+  
+ 
+    
+      <ion-buttons  >
+          <button   ion-button  clear small icon-start>
+              <ion-icon name='cart'></ion-icon>
+              <span>구매하기</span>
+          </button>  
+      </ion-buttons>  
+      <ion-buttons end>
+        <button  (click)="goComment()" ion-button  clear small icon-start>
+          <ion-icon name='text'></ion-icon>
+          <span>{{data.comment_cnt | number}}</span>
+        </button>
+        <button   ion-button  clear small icon-start>
+            <ion-icon name='share'></ion-icon>
+            
+        </button>  
+        </ion-buttons>  
+    </ion-toolbar>
+</ion-footer>

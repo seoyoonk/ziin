@@ -19,6 +19,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { WebLoginPage } from '../pages/webLogin/webLogin';
 import { ContactPickupPage } from '../pages/contactPickup/contactPickup';
 import { GoodsRegisterPage } from '../pages/goodsRegister/goodsRegister';
+import { CommentPage } from '../pages/comment/comment';
 import { FCM } from '@ionic-native/fcm';
 import { Contacts } from '@ionic-native/contacts';
 import { TextMaskModule } from 'angular2-text-mask';
@@ -32,7 +33,7 @@ import { File } from '@ionic-native/file';
   declarations: [
     MyApp,
     HomePage,WebLoginPage,PictureSelPopup,RcmdSelPopup,DetailPage,
-    ListPage, RegisterPage,GoodsRegisterPage,ContactPickupPage
+    ListPage, RegisterPage,GoodsRegisterPage,ContactPickupPage,CommentPage
   ],
   imports: [
     BrowserModule,
@@ -44,7 +45,7 @@ import { File } from '@ionic-native/file';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,PictureSelPopup,RcmdSelPopup,DetailPage,
-    HomePage,WebLoginPage,ContactPickupPage,
+    HomePage,WebLoginPage,ContactPickupPage,CommentPage,
     ListPage, RegisterPage,GoodsRegisterPage
   ],
   providers: [
