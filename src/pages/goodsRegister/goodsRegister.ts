@@ -163,8 +163,10 @@ export class GoodsRegisterPage {
             (res)=>{
                 this.rest.closeLoading();
                 this.response = res;
+                this.response.goods_nm = this.goodsInfo.goods_nm;
                 if(res.res_code=="ok")
                 {
+                    this.goods.images = [];
                     if(confirm("다른 사람에게 추천하시겠습니까?"))
                     {
                         this.showRcmdSel();

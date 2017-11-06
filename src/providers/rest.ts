@@ -177,6 +177,7 @@ export class RestProvider {
   }
   insertComment(data)
   {
+    console.log(data);
     return this.post("/api/goods/insertGoodsComment.do",data);
   }
 }

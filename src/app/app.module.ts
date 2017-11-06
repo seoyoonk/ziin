@@ -35,7 +35,7 @@ import { ZNScoreComponent } from '../comp/score';
   declarations: [
     MyApp,
     HomePage,WebLoginPage,PictureSelPopup,RcmdSelPopup,DetailPage,
-    ListPage, RegisterPage,GoodsRegisterPage,ContactPickupPage,CommentPage,ZNScoreComponent
+    ListPage, RegisterPage,GoodsRegisterPage,ContactPickupPage,CommentPage,ZNScoreComponent, OrderPage
   ],
   imports: [
     BrowserModule,
@@ -48,7 +48,7 @@ import { ZNScoreComponent } from '../comp/score';
   entryComponents: [
     MyApp,PictureSelPopup,RcmdSelPopup,DetailPage,OrderPage,
     HomePage,WebLoginPage,ContactPickupPage,CommentPage,
-    ListPage, RegisterPage,GoodsRegisterPage
+    ListPage, RegisterPage,GoodsRegisterPage, OrderPage
   ],
   providers: [
     StatusBar,

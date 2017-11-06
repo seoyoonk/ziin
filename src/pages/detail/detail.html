@@ -31,7 +31,7 @@
     </p>
     <div>{{data.detail_desc}}</div>
   </ion-card-content>
-  
+  <img  [src]="rest.config.img_goods_root_path + data.list_img_1" />
   <div *ngFor="let i of data.detail_img_list">
     <img  [src]="rest.config.img_goods_root_path + i" />
   </div>

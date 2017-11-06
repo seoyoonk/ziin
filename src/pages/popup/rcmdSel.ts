@@ -23,11 +23,11 @@ import { ContactPickupPage } from '../contactPickup/contactPickup';
   })
   export class RcmdSelPopup {
       
-    reason = this.navParam.data.goods_nm +" 추천합니다.";
+    reason 
     target="kakao";
     
     constructor(public viewCtrl: ViewController,  private kakao:KakaoTalk, private rest:RestProvider, private navParam:NavParams, private modalCtrl:ModalController) {
-        
+        this.reason = this.navParam.data.goods_nm +" 추천합니다.";
     }
     goContactPickup(){
         let modal = this.modalCtrl.create(ContactPickupPage);
@@ -64,7 +64,7 @@ import { ContactPickupPage } from '../contactPickup/contactPickup';
               text : '상품 상세 페이지로 이동'
             }
         };    
-        
+        alert('share kakao');
         this.kakao.share(options).then((data)=>{
             alert(JSON.stringify(data));
         }, 
