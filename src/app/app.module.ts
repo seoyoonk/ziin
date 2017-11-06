@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { DetailPage } from '../pages/detail/detail';
 import { ListPage } from '../pages/list/list';
 import { RegisterPage } from '../pages/register/register';
+import { OrderPage } from '../pages/order/order';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { RestProvider } from '../providers/rest';
@@ -32,7 +33,7 @@ import { File } from '@ionic-native/file';
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,WebLoginPage,PictureSelPopup,RcmdSelPopup,DetailPage,
+    HomePage,WebLoginPage,PictureSelPopup,RcmdSelPopup,DetailPage,OrderPage,
     ListPage, RegisterPage,GoodsRegisterPage,ContactPickupPage,CommentPage
   ],
   imports: [
@@ -44,7 +45,7 @@ import { File } from '@ionic-native/file';
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,PictureSelPopup,RcmdSelPopup,DetailPage,
+    MyApp,PictureSelPopup,RcmdSelPopup,DetailPage,OrderPage,
     HomePage,WebLoginPage,ContactPickupPage,CommentPage,
     ListPage, RegisterPage,GoodsRegisterPage
   ],
