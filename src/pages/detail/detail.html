@@ -15,6 +15,7 @@
     <ion-avatar item-start>
       <img [src]="rest.userInfo.mem_img">
     </ion-avatar>
+    <zn-score score="{{data.eval_avg_score}}"></zn-score>
     <h2>{{data.register_nm}} 
         <span float-right><img></span></h2>
     <p>{{data.reg_dttm | date:'yyyy-MM-dd'}} 소개
@@ -37,24 +38,24 @@
  
       
       
-  <ion-row>
-    <ion-col>   
+  <div class="cnt_area">
+    <span  [hidden]="data.producer_nm == ''">   
       <ion-icon name='person'></ion-icon> 
-      <span>생산자 {{data.producer_nm}}</span>
-    </ion-col> 
-    <ion-col>
+      <span>생산자:{{data.producer_nm}}</span>
+    </span> 
+    <span >
        
         <ion-icon name='cart'></ion-icon>
         <span>주문 {{data.tot_sale_cnt | number}}개</span>
       
-    </ion-col>
-    <ion-col>
+    </span>
+    <span >
       
         <ion-icon name='basket'></ion-icon>
         <span>재고 {{data.tot_stock_cnt | number}}개</span>
       
-    </ion-col>
-  </ion-row>
+    </span>
+  </div>
    
  
  
@@ -76,7 +77,7 @@
           <ion-icon name='text'></ion-icon>
           <span>{{data.comment_cnt | number}}</span>
         </button>
-        <button   ion-button  clear small icon-start>
+        <button (click)="showRcmdSel()"  ion-button  clear small icon-start>
             <ion-icon name='share'></ion-icon>
             
         </button>  

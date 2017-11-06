@@ -30,11 +30,11 @@ export class GoodsRegisterPage {
     showPictureSel()
     {
       let popover = this.popoverCtrl.create(PictureSelPopup);
-      popover.present(this.response);
+      popover.present();
     }
     showRcmdSel()
     {
-        let popover = this.popoverCtrl.create(RcmdSelPopup);
+        let popover = this.popoverCtrl.create(RcmdSelPopup,this.response);
         popover.present();
     }
     convert(field, event: any) {
@@ -131,7 +131,7 @@ export class GoodsRegisterPage {
                 let imgInfo : any = new Object();
                 imgInfo.file_nm = fileName;
                 imgInfo.stream_string = data.substring(pos+1);
-                if(i==0)
+                if(idx==0)
                 {
                     this.goodsInfo.list_img_1 = imgInfo;
                 }
@@ -162,6 +162,17 @@ export class GoodsRegisterPage {
         this.rest.insertGoods(this.isNew, this.goodsInfo).subscribe(
             (res)=>{
                 this.rest.closeLoading();
+                this.response = res;
+                if(res.res_code=="ok")
+                {
+                    if(confirm("다른 사람에게 추천하시겠습니까?"))
+                    {
+                        this.showRcmdSel();
+                    }
+                    else{
+                        this.dismiss();
+                    }
+                }    
                 alert(JSON.stringify(res));
             },
             (err)=>{

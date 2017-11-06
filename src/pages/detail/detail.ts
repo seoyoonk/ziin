@@ -1,8 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { ViewController, ModalController, NavParams } from 'ionic-angular';
+import { ViewController, ModalController, NavParams,PopoverController } from 'ionic-angular';
 import { GoodsRegisterPage } from '../goodsRegister/goodsRegister';
 import { RestProvider } from '../../providers/rest';
 import {CommentPage} from '../comment/comment';
+import { RcmdSelPopup } from '../popup/rcmdSel';
 @Component({
   selector: 'page-detail',
   templateUrl: 'detail.html'
@@ -40,11 +41,16 @@ export class DetailPage {
   }
   goComment()
   {
-    let modal = this.modalCtrl.create(CommentPage, {goosd_no : this.params.data.goods_no});
+    let modal = this.modalCtrl.create(CommentPage, {goods_no : this.params.data.goods_no});
     modal.present();
 
   }
-  constructor(public viewCtrl: ViewController, private modalCtrl: ModalController, public rest: RestProvider, public params: NavParams) {
+  showRcmdSel()
+  {
+      let popover = this.popoverCtrl.create(RcmdSelPopup,this.data);
+      popover.present();
+  }
+  constructor(private popoverCtrl:PopoverController, public viewCtrl: ViewController, private modalCtrl: ModalController, public rest: RestProvider, public params: NavParams) {
     
     
   

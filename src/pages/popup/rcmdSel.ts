@@ -22,7 +22,8 @@ import { ContactPickupPage } from '../contactPickup/contactPickup';
     `
   })
   export class RcmdSelPopup {
-    reason;
+      
+    reason = this.navParam.data.goods_nm +" 추천합니다.";
     target="kakao";
     
     constructor(public viewCtrl: ViewController,  private kakao:KakaoTalk, private rest:RestProvider, private navParam:NavParams, private modalCtrl:ModalController) {

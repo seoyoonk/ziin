@@ -175,4 +175,8 @@ export class RestProvider {
   {
     return this.post("/api/goods/selectListGoodsComment.do",goodsInfo);
   }
+  insertComment(data)
+  {
+    return this.post("/api/goods/insertGoodsComment.do",data);
+  }
 }

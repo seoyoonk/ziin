@@ -25,7 +25,7 @@ export class ListPage {
   }
   goComment(data)
   {
-    let modal = this.modalCtrl.create(CommentPage, {goosd_no : data.goods_no});
+    let modal = this.modalCtrl.create(CommentPage, {goods_no : data.goods_no});
     modal.present();
 
   }
