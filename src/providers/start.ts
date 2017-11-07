@@ -85,7 +85,9 @@ export class StartProvider {
 
       }
       else {
-        this.rest.deviceInfo.auth_token = val;
+        this.rest.deviceInfo.auth_token = val.auth_token;
+        val.remove("auth_token");
+        this.rest.userInfo = val;
         this.doneSNSLogin = true;
         this.donePhone = true;
         this.donePushToken = true;
@@ -103,7 +105,9 @@ export class StartProvider {
       console.log("ziin: after register: " + JSON.stringify(data))
       if (data.res_code == 'ok') {
         console.log("ziin: register success");
-        this.storage.set("auth_token", this.rest.deviceInfo.auth_token);
+        let obj : any = Object.assign({}, this.rest.userInfo);
+        obj.auth_token = this.rest.deviceInfo.auth_token;
+        this.storage.set("auth_token", obj);
         this.goHome();
       }
       else {
@@ -117,21 +121,14 @@ export class StartProvider {
     if (res.result_code == 0)  // 로그인 성공
     {
 
-      this.storage.set("auth_token", this.rest.deviceInfo.auth_token);
+      let obj : any = Object.assign({}, this.rest.userInfo);
+      obj.auth_token = this.rest.deviceInfo.auth_token;
+      this.storage.set("auth_token", obj);
+      
       this.goHome();
     }
     else if (res.result_code == -2)  // 로그인 실패
     {
-      this.storage.remove('auth_token');
-      if(this.rest.userInfo.email=='')
-      {
-        this.doneSNSLogin = false;
-      }
-      if(this.rest.userInfo.mobile=='')
-      {
-        this.donePhone = false;
-        this.donePushToken=false;
-      }
       this.onStart(this.splashScreen);
     }
     else // 존재하지 않는 사용자

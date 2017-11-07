@@ -22,6 +22,10 @@ export class RestProvider {
   public config = {img_goods_root_path:''};
   
 
+  clearAuthToken()
+  {
+    this.deviceInfo.auth_token="NO_HAS_APP_TOKEN";
+  }
   constructor(public http: Http, private loadingCtrl: LoadingController) {
 
   }
@@ -87,7 +91,7 @@ export class RestProvider {
           } 
           else if(result_code == -1)
           {
-            this.deviceInfo.auth_token = "NO_HAS_APP_TOKEN";
+            this.clearAuthToken();
             alert("다른 곳에서 로긴하셨습니다. 다시 로그인 합니다.");
           }
           return { result_code: result_code };
