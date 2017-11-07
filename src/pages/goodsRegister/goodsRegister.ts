@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ViewController,PopoverController } from 'ionic-angular';
 import { File } from '@ionic-native/file';
 import { RestProvider } from '../../providers/rest'; 
-import { GoodsProvider } from '../../providers/goods';
+import { UtilProvider } from '../../providers/util';
 import { PictureSelPopup } from '../popup/pictureSel';
 import { RcmdSelPopup } from '../popup/rcmdSel';
 import { Contacts } from '@ionic-native/contacts';
@@ -18,8 +18,8 @@ export class GoodsRegisterPage {
     isNew :boolean = true;
     response : any = {goods_no:683, list_img_1:'/2017/10/20/c4127d71-03ff-44d7-8502-be802c759d9a.PNG'}
     constructor( private viewCtrl: ViewController, private popoverCtrl: PopoverController, private rest:RestProvider,
-        private goods:GoodsProvider, private contacts:Contacts, private file : File) {
-        this.images = goods.images;
+        private util:UtilProvider, private contacts:Contacts, private file : File) {
+        this.images = util.images;
         
     }
     delImage(idx)
@@ -36,15 +36,18 @@ export class GoodsRegisterPage {
     {
         let popover = this.popoverCtrl.create(RcmdSelPopup,this.response);
         popover.present();
+        popover.onDidDismiss((data)=>{
+            this.viewCtrl.dismiss(this.response);
+        })
     }
     convert(field, event: any) {
         if(field=='sellprice')
         {
-            this.goodsInfo.goods_opt_list[0].sellprice= this.rest.formatNumber(event.target.value);
+            this.goodsInfo.goods_opt_list[0].sellprice= this.util.formatNumber(event.target.value);
         }
         else
         {
-            this.goodsInfo[field] = this.rest.formatNumber(event.target.value);
+            this.goodsInfo[field] = this.util.formatNumber(event.target.value);
         }
     }
     findContact()
@@ -56,7 +59,7 @@ export class GoodsRegisterPage {
                 arr.forEach((value, index) => {
                     if(value.value.startsWith("010"))
                     {
-                        this.goodsInfo.producer_tel = value.value;
+                        this.goodsInfo.producer_tel = this.util.normalizePhone(value.value);
                         return;
                     }
 
@@ -131,14 +134,8 @@ export class GoodsRegisterPage {
                 let imgInfo : any = new Object();
                 imgInfo.file_nm = fileName;
                 imgInfo.stream_string = data.substring(pos+1);
-                if(idx==0)
-                {
-                    this.goodsInfo.list_img_1 = imgInfo;
-                }
-                else
-                {
-                    this.goodsInfo.detail_img.push(imgInfo);
-                }
+                this.goodsInfo.detail_img.push(imgInfo);
+                
                 idx++;
                 if(idx==this.images.length)
                 {
@@ -166,13 +163,13 @@ export class GoodsRegisterPage {
                 this.response.goods_nm = this.goodsInfo.goods_nm;
                 if(res.res_code=="ok")
                 {
-                    this.goods.images = [];
+                    this.util.images = [];
                     if(confirm("다른 사람에게 추천하시겠습니까?"))
                     {
                         this.showRcmdSel();
                     }
                     else{
-                        this.dismiss();
+                        this.viewCtrl.dismiss(this.response);
                     }
                 }    
                 alert(JSON.stringify(res));

@@ -1,7 +1,7 @@
 import { Component} from '@angular/core';
 import { ViewController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera'
-import { GoodsProvider } from '../../providers/goods';
+import { UtilProvider } from '../../providers/util';
 import { ImagePicker } from '@ionic-native/image-picker';
 @Component({
     template: `
@@ -13,7 +13,7 @@ import { ImagePicker } from '@ionic-native/image-picker';
   })
   export class PictureSelPopup {
    
-    constructor(public viewCtrl: ViewController, private camera: Camera, public goods:GoodsProvider, public imagePicker: ImagePicker) {
+    constructor(public viewCtrl: ViewController, private camera: Camera, public util:UtilProvider, public imagePicker: ImagePicker) {
         
     }
     goGallery()
@@ -25,7 +25,7 @@ import { ImagePicker } from '@ionic-native/image-picker';
       };
       this.imagePicker.getPictures(options).then((results) => {
         for (var i = 0; i < results.length; i++) {
-          this.goods.images.push(results[i]);
+          this.util.images.push(results[i]);
         }
         this.close();
       }, (err) => { 
@@ -46,7 +46,7 @@ import { ImagePicker } from '@ionic-native/image-picker';
             // imageData is either a base64 encoded string or a file URI
             // If it's base64:
             
-            this.goods.images.push(imageData);
+            this.util.images.push(imageData);
             
             this.close();
            }, (err) => {

@@ -27,10 +27,10 @@ import { ContactPickupPage } from '../contactPickup/contactPickup';
     target="kakao";
     
     constructor(public viewCtrl: ViewController,  private kakao:KakaoTalk, private rest:RestProvider, private navParam:NavParams, private modalCtrl:ModalController) {
-        this.reason = this.navParam.data.goods_nm +" 추천합니다.";
+        this.reason = this.navParam.data.goods_nm +"(가격:" + this.navParam.data.sellprice + ") 추천합니다.";
     }
     goContactPickup(){
-        let modal = this.modalCtrl.create(ContactPickupPage);
+        let modal = this.modalCtrl.create(ContactPickupPage, this.navParam.data);
         modal.present();
         modal.onDidDismiss((data) => {
           console.log('ziin: afterGoodsRegister ' + JSON.stringify(data));
@@ -52,6 +52,7 @@ import { ContactPickupPage } from '../contactPickup/contactPickup';
     }
     shareKakao()
     {
+        
         let options:any ={
             text : this.reason,
             image : {
@@ -60,13 +61,13 @@ import { ContactPickupPage } from '../contactPickup/contactPickup';
               height : 90,
             },
             weblink :{
-              url : this.rest.apiUrl ,
-              text : '상품 상세 페이지로 이동'
+              url : this.rest.config.goods_not_login + "goods_no=" + this.navParam.get("goods_no") + "&from=" + this.rest.userInfo.mem_no,
+              text : '[지인마켓] 상품 페이지로 이동'
             }
         };    
-        alert('share kakao');
+        
         this.kakao.share(options).then((data)=>{
-            alert(JSON.stringify(data));
+            this.viewCtrl.dismiss();
         }, 
         (err)=>{
             alert("에러" + err);

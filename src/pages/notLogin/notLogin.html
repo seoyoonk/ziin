@@ -1,9 +1,11 @@
 <ion-header>
   <ion-navbar>
-    <ion-title text-center>{{params.data.goods_nm}} 상세</ion-title>
-    <ion-buttons start>
-        <button ion-button (click)="dismiss()">
-        <ion-icon name="close" ></ion-icon>
+    <img src="../assets/imgs/header_logo.png" width="80%" alt="지인의 좋은 상품을 지인에게 소개하고 함께 구매하는 추천마켓, 지인마켓" />
+    
+    
+    <ion-buttons end>
+        <button outline ion-button (click)="dismiss()" color="primary">
+        앱으로 보기
         </button>
     </ion-buttons>
   </ion-navbar>
@@ -41,7 +43,7 @@
       
       
   <div class="cnt_area">
-    <span  [hidden]="data.producer_nm == ''">   
+    <span  [hidden]="data.producer_nm == '' || data.producer_nm == null">   
       <ion-icon name='person'></ion-icon> 
       <span>생산자:{{data.producer_nm}}</span>
     </span> 
@@ -68,20 +70,12 @@
   
  
     
-      <ion-buttons  >
+      <ion-buttons  text-center>
           <button (click)="goOrder()"  ion-button  clear small icon-start>
               <ion-icon name='cart'></ion-icon>
               <span>구매하기</span>
           </button>  
       </ion-buttons>  
-      <ion-buttons end>
-        <button  (click)="goComment()" ion-button  clear small icon-start>
-          <ion-icon name='text'></ion-icon>
-          <span>{{data.comment_cnt | number}}</span>
-        </button>
-        <button (click)="showRcmdSel()"  ion-button  clear small icon-start>
-            <ion-icon name='share'></ion-icon>
-        </button>  
-        </ion-buttons>  
+        
     </ion-toolbar>
 </ion-footer>

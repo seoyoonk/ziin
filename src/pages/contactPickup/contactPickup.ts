@@ -1,26 +1,51 @@
 import { Component } from '@angular/core';
-import { ViewController } from 'ionic-angular';
+import { ViewController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest'; 
-
+import { UtilProvider } from '../../providers/util';
 import { Contacts, ContactFindOptions } from '@ionic-native/contacts'
 @Component({
   selector: 'page-contactPickup',
   templateUrl: 'contactPickup.html'
 })
 export class ContactPickupPage {
-    selContacts = [];
+    selContacts = {};
     contactList = [] ;
     contactListOrg = [] ;
-    constructor( private viewCtrl: ViewController,  private rest:RestProvider, private contacts:Contacts) {
+    constructor( private viewCtrl: ViewController,  private navParam:NavParams,private rest:RestProvider, 
+        private util:UtilProvider, private contacts:Contacts) {
+    }
+    addContact(data)
+    {
+        if(data.checked)
+        {
+            this.selContacts[data.name]=data.mobiles;
+        }
+        else
+        {
+            delete this.selContacts[data.name];
+        }
     }
     save()
     {
         alert(JSON.stringify(this.selContacts));
+        let param = {goods_no: this.navParam.data.goods_no, rcmds:this.selContacts }
+        this.rest.insertRcmd(param).subscribe(
+            (res)=>
+            {
+                this.viewCtrl.dismiss();
+            },
+            (err)=>
+            {
+                alert(err);
+            }
+            
+        )
+
     }
     filterItems(ev: any) {
         
         let val = ev.target.value;
-        alert(val);
+        
         if (val && val.trim() !== '') {
           this.contactList = this.contactListOrg.filter(function(item) {
             return item.name.toLowerCase().includes(val.toLowerCase());
@@ -43,7 +68,7 @@ export class ContactPickupPage {
                      arr.forEach((value, index) => {
                          if(value.value.startsWith("010"))
                          {
-                            contact.mobiles.push(value.value);
+                            contact.mobiles.push(this.util.normalizePhone(value.value));
                          }
      
                      });

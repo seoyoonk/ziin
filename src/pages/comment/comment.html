@@ -10,21 +10,42 @@
 </ion-header>
 
 <ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)" >
+        <ion-refresher-content
+            pullingText=""
+            refreshingText="로딩중...">
+        </ion-refresher-content>
+    </ion-refresher>
     <ion-list no-lines>
-        <ion-item *ngFor="let c of comments">
-            <ion-avatar item-start>
-                <img [src]="c.mem_img">
-            </ion-avatar>
-            {{c.reg_mem_nm}}  {{c.reg_dttm | date:'yyyy-MM-dd'}}
-            {{c.content}}
-            <span [hidden]="c.eval_score == null">구매평가{{c.eval_score}}</span>
-            <button>댓글달기</button>
-        </ion-item>
+        <div *ngFor="let c of comments; let idx = index" class="level{{c.level}}">
+            <hr [hidden]="c.level !=1 || idx == 0" />
+            <ion-item class="comment" >
+            
+            
+                <ion-avatar item-start>
+                    <img [src]="c.mem_img">
+                </ion-avatar>
+                <span class="mem_nm">
+                    {{c.reg_mem_nm}} . <zn-date val="{{c.reg_dttm}}"></zn-date> <zn-score [hidden]="c.eval_score == null" score="{{c.eval_score}}"></zn-score> </span>
+                <span class="buttonArea" >
+                    <button ion-button clear (click)="goChildComment(c)">댓글달기</button>
+                </span>
+                <div class='content'>{{c.content}}</div>
+                
+            
+            </ion-item>
+    </div>
     </ion-list>
 </ion-content>
 <ion-footer>
+        <div class="subCommentArea" [hidden]="parentComment.sno == 0" >{{parentComment.content}} <span class="title">댓글</span>
+            <button ion-button icon-only  clear (click)="clearParent()">
+                    <ion-icon name="md-close-circle"></ion-icon>
+                </button>
+        </div>
     <ion-toolbar color="primary">
-        <ion-input placeholder="댓글을 입력하세요" [(ngModel)]="data.content"></ion-input>
+        
+        <ion-input #content placeholder="댓글을 입력하세요" [(ngModel)]="data.content"></ion-input>
         <ion-buttons end>
             <button ion-button icon-only (click)="save()">
                 <ion-icon name="send"></ion-icon>
