@@ -14,10 +14,26 @@
     <div style="margin-top:1.2em;margin-bottom:1.2em">
       <span style="font-size:1.2em">주문내역</span>
     </div>
-    <img style="width:6em" float-left [src]="rest.config.img_goods_root_path + params.get('list_img_1')">
+    <img style="width:6em" float-left [src]="rest.config.img_goods_root_path + params.data.list_img_1">
     <div text-right>
-      tetetetststststetetstst
+      <span>{{params.data.goods_nm}}</span>
+      <p>
+        <span>{{params.data.goods_opt_list[0].sellprice | number}}</span>
+      </p>
     </div>
+    <div>
+      <span>주문수량</span>
+      <button style="width:3em;height:3em" (click)="minusGoodsEa()">
+        <ion-icon name="remove"></ion-icon>
+      </button>
+      <div style="display:-webkit-inline-box;width:3em;padding-top:1em;padding-bottom:1em;background-color: #F5F5F5" text-center>{{goods_ea}}</div>
+      <button style="width:3em;height:3em" (click)="plusGoodsEa()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+      <span>{{goods_ea * params.data.goods_opt_list[0].sellprice | number}}</span>
+      <span>원</span>
+    </div>
+    <span style="margin-top:0.5em;margin-bottom:0.5em">배송지</span>
   </div>
 </ion-content>
 
