@@ -28,6 +28,7 @@ export class StartProvider {
   doneSNSLogin: boolean = false;
   donePushToken: boolean = false;
   splashScreen: SplashScreen;
+  errCount : number = 0;
   constructor(private app: App, private device: Device, private modalCtrl: ModalController,
     public kakao: KakaoTalk, public rest: RestProvider, private storage: Storage,
     private sim: Sim) {
@@ -86,7 +87,7 @@ export class StartProvider {
       }
       else {
         this.rest.deviceInfo.auth_token = val.auth_token;
-        val.remove("auth_token");
+        val.auth_token = null;
         this.rest.userInfo = val;
         this.doneSNSLogin = true;
         this.donePhone = true;
@@ -129,7 +130,7 @@ export class StartProvider {
     }
     else if (res.result_code == -2)  // 로그인 실패
     {
-      this.onStart(this.splashScreen);
+      this.appStart(false);
     }
     else // 존재하지 않는 사용자
     {
@@ -138,6 +139,7 @@ export class StartProvider {
 
     }
   }
+
   appStart(isNew: boolean) {
 
     if (this.doneSNSLogin && this.donePhone && this.donePushToken) {
@@ -154,7 +156,19 @@ export class StartProvider {
         },
         err => {
           this.rest.closeLoading();
-          alert("ERROR!: " + err);
+          if(this.errCount == 0)
+          {
+            this.rest.clearAuthToken();
+            this.appStart(false);
+            this.errCount ++;
+          }
+          else
+          {
+            
+            alert("시스템에 문제가 있습니다");
+          }
+
+            
         }
       );;
     }

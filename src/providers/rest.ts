@@ -19,7 +19,7 @@ export class RestProvider {
 
   public userInfo = {auth_result:0, mem_no:'', not_yet_read:0, mobile: '', mem_nm: '', email: '', mem_img: '', sns: '', sns_id: '', push_token: '' };
   public deviceInfo = { app_ver: this.app_ver, app_id: this.app_id, device_id: '', os_type: '', os_ver: '', auth_token: 'NO_HAS_APP_TOKEN' };
-  public config = {img_goods_root_path:''};
+  public config = {img_goods_root_path:'http://14.63.197.21:7070/resources/goods_image', goods_not_login : "http://192.168.0.17:8100/?"};
   
 
   clearAuthToken()
@@ -40,6 +40,7 @@ export class RestProvider {
       return this.post('/api/goods/updateGoods.do', goodsInfo);
     }
   }
+
   login(loginInfo) {
 
     return this.post('/api/member/login.do', loginInfo).map(res =>
@@ -53,7 +54,7 @@ export class RestProvider {
         this.userInfo.mem_img= res_data.mem_img;
         this.userInfo.mem_nm= res_data.mem_nm;
         this.userInfo.not_yet_read= res_data.not_yet_read;
-        this.config.img_goods_root_path = res_data.img_goods_root_path;
+        this.config = res_data.config;
         return res;
       } );
   }
@@ -66,16 +67,14 @@ export class RestProvider {
   closeLoading() {
     if (this.loading != null) this.loading.dismiss();
   }
-  processAfterPost()
-  {
-
-  }
+ 
   appStart() {
 
     let response = this.post("/api/appStart.do", this.userInfo);
     return response.map(
       (res) => {
         let result_code = this.userInfo.auth_result;
+        
         if(result_code==0)
         {
             
@@ -86,7 +85,7 @@ export class RestProvider {
               this.userInfo.mem_img= res_data.mem_img;
               this.userInfo.mem_nm= res_data.mem_nm;
               this.userInfo.not_yet_read= res_data.not_yet_read;
-              this.config.img_goods_root_path = res_data.img_goods_root_path;
+              this.config = res_data.config;
             }
           } 
           else if(result_code == -1)
@@ -101,22 +100,10 @@ export class RestProvider {
     )
 
   }
-  formatNumber(num)
-  {
-    
-    num += '';
-    num = num.replace(/[^\d\.]/g ,'');
-    let x = num.split('.');
-    let x1 = x[0];
-    let x2 = x.length > 1 ? '.' + x[1] : '';
-    var rgx = /(\d+)(\d{3})/;
-    while (rgx.test(x1)) {
-      x1 = x1.replace(rgx, '$1' + ',' + '$2');
-    }
-    return x1 + x2;
-  }
+ 
   private post(url, param1:any)
   {
+    
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
@@ -164,10 +151,7 @@ export class RestProvider {
     return this.post("/api/member/insertMember.do", this.userInfo);
   }
 
-  getDeliveryList(kubun: string) {
-    var response = this.http.get("http://192.168.0.17:8090/test/deliveryList.jsp");
-    return response;
-  }
+
 
   selectListGoodsRcmd() {
     return this.post("/api/goodsRcmd/selectListGoodsRcmd.do",{page_no:1, row_count:100});
@@ -181,7 +165,12 @@ export class RestProvider {
   }
   insertComment(data)
   {
-    console.log(data);
+    
     return this.post("/api/goods/insertGoodsComment.do",data);
+  }
+  insertRcmd(data)
+  {
+    
+    return this.post("/api/goods/insertGoodsRcmds.do",data);
   }
 }

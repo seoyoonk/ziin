@@ -6,12 +6,12 @@
 </ion-header>
   
 <ion-content>
-    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+    <ion-searchbar (ionInput)="filterItems($event)"></ion-searchbar>
     <ion-list>
         <ion-item *ngFor="let item of contactList">
             
             <ion-label> {{item.name}}</ion-label>
-            <ion-checkbox [(ngModel)]="item.checked"></ion-checkbox>
+            <ion-checkbox [(ngModel)]="item.checked" (click)="addContact(item)"></ion-checkbox>
             
         </ion-item>    
     </ion-list>

@@ -1,2 +1,72 @@
 page-comment {
+    .mem_nm, .buttonArea{
+        font-size:  0.8em;
+        text-align: right;
+        color : color($colors, menu, contrast)
+    }
+    .zn-score-area
+    {
+        color : color($colors,primary);
+        margin-left : 5px;
+        
+    }
+    
+    .comment{
+        font-size:1em;
+    }
+    .comment button {
+        margin-top: 0px;
+    }
+    .comment ion-avatar
+    {
+        position: absolute;
+        top: 5px;
+    
+    }
+    .level2
+    {
+        margin-left : 10px;
+    }
+    .level3
+    {
+        margin-left : 20px;
+    }
+    .level4
+    {
+        margin-left : 30px;
+    }
+    .level5
+    {
+        margin-left : 40px;
+    }
+    .level6
+    {
+        margin-left : 50px;
+    }
+    .comment .item-inner
+    {
+        padding-left : 50px;
+    }
+    .content{
+        white-space: normal;
+    }
+    .subCommentArea button {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        z-index: 10;
+        width: 30px;
+        height: 30px;
+        border-width : 0px;
+    }
+    .subCommentArea{
+        background-color : white;
+        min-height: 3em;
+        
+    }
+    .subCommentArea .title
+    {
+        font-size:  0.5em;
+        color : color($colors, menu, contrast)
+    }
 }

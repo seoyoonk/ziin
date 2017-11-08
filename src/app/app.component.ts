@@ -3,7 +3,7 @@ import { ToastController,  Platform , Nav, IonicApp} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StartProvider } from '../providers/start';
-
+import { NotLoginPage } from '../pages/notLogin/notLogin';
  
 import { WebLoginPage } from '../pages/webLogin/webLogin';
 
@@ -74,7 +74,16 @@ export class MyApp {
       else
       {
         
-        this.rootPage = WebLoginPage;
+        if(location.search.startsWith("?goods_no="))
+        {
+            let goods_no:string = location.search.substring("?goods_no=".length);
+            this.nav.setRoot(NotLoginPage,{goods_no: goods_no});
+            
+        }
+        else
+        {
+          this.rootPage = WebLoginPage;
+        }
       }
       
     });

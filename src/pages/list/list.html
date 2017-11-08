@@ -3,7 +3,12 @@
     </ion-navbar>
   </ion-header>
     <ion-content class="cards-bg social-cards">
-    
+      <ion-refresher (ionRefresh)="doRefresh($event)" >
+            <ion-refresher-content
+              pullingText=""
+              refreshingText="로딩중...">
+            </ion-refresher-content>
+      </ion-refresher>
       <ion-card *ngFor="let data of dataList" >
         <ion-item>
           <ion-avatar item-start>
@@ -12,10 +17,11 @@
           <zn-score score="{{data.eval_avg_score}}"></zn-score>
           
           <h2>{{data.rcmd_mem_nm}}
-              <span float-right><img></span></h2>
+            </h2>
               
-          <p>{{data.rcmd_dttm | date:'yyyy-MM-dd'}} <span [hidden]="data.rcmd_mem_no == null">추천</span><span [hidden]="data.rcmd_mem_no != null">소개</span>
-            <span float-right>{{data.sale_end_dd}} 마감</span>
+          <p>
+            <zn-date val="{{data.rcmd_dttm}}"></zn-date> <span [hidden]="data.rcmd_mem_no == null">추천</span><span [hidden]="data.rcmd_mem_no != null">소개</span>
+            <span float-right><zn-chk-today val="{{data.sale_end_dd}}"></zn-chk-today> 마감</span>
           </p>
         </ion-item>
     
