@@ -3,33 +3,44 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <ion-segment [(ngModel)]="icons" color="secondary" (ionChange)="segmentChanged($event)">
-    <ion-segment-button value="camera">
-      <ion-icon name="camera"></ion-icon>
+  <ion-segment [(ngModel)]="listKubun" color="first" (ionChange)="segmentChanged()">
+    <ion-segment-button value="progress">
+      <span>배송중</span>
     </ion-segment-button>
-    <ion-segment-button value="bookmark">
-      <ion-icon name="bookmark"></ion-icon>
+    <ion-segment-button value="complate">
+      <span>배송완료</span>
+    </ion-segment-button>
+    <ion-segment-button value="cancel">
+      <span>환불/취소</span>
     </ion-segment-button>
   </ion-segment>
-  <div [ngSwitch]="icons">
-    <ion-list *ngSwitchCase="'camera'">
-      <ion-item>
+  <div [ngSwitch]="listKubun">
+    <ion-list *ngSwitchCase="'progress'">
+      <ion-item *ngFor="let progressData of progressDataList">
         <ion-thumbnail item-start>
-            <ion-icon name="camera"></ion-icon>
+          <img >
         </ion-thumbnail>
-        <h2>Ruby</h2>
       </ion-item>
-      ...
     </ion-list>
 
-    <ion-list *ngSwitchCase="'bookmark'">
-      <ion-item>
+    <ion-list *ngSwitchCase="'complate'">
+      <ion-item *ngFor="let progressData of progressDataList">
         <ion-thumbnail item-start>
-            <ion-icon name="bookmark"></ion-icon>
+            <img >
         </ion-thumbnail>
-        <h2>Luna</h2>
       </ion-item>
-      ...
     </ion-list>
+
+    <ion-list *ngSwitchCase="'cancel'">
+      <ion-item *ngFor="let progressData of progressDataList">
+        <ion-thumbnail item-start>
+            <img >
+        </ion-thumbnail>
+      </ion-item>
+    </ion-list>
+
+    <ion-infinite-scroll (ionInfinite)="scrollEnd($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </div>
 </ion-content>

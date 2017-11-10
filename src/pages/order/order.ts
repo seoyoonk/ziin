@@ -97,10 +97,7 @@ export class OrderPage {
     } else if (!this.dlvAddrData.receiver_nm || this.dlvAddrData.receiver_addr_2.trim() == "") {
       alert("상세주소는 필수값입니다.");
       return;
-    }
-    let mobile = this.dlvAddrData.receiver_mobile.replace(/-/gi, "").trim();
-    mobile = mobile.substring(0, 3) + "-" + mobile.substring(3, 7) + "-" + mobile.substring(7, 11);
-    if (!/^\d{3}-\d{3,4}-\d{4}$/.test(mobile)) {
+    } else if (this.util.mobileCheck(this.dlvAddrData.receiver_mobile)) {
       alert("연락처 형식이 아닙니다 다시 입력해주세요.");
       return;
     }
@@ -111,11 +108,7 @@ export class OrderPage {
       } else if (this.orderer_mobile || this.orderer_mobile.trim() == '') {
         alert("주문자 연락처는 필수값입니다.");
         return;
-      }
-
-      let odr_mobile = this.orderer_mobile.replace(/-/gi, "").trim();
-      odr_mobile = odr_mobile.substring(0, 3) + "-" + odr_mobile.substring(3, 7) + "-" + odr_mobile.substring(7, 11);
-      if (!/^\d{3}-\d{3,4}-\d{4}$/.test(odr_mobile)) {
+      } else if (this.util.mobileCheck(this.orderer_mobile)) {
         alert("연락처 형식이 아닙니다 다시 입력해주세요.");
         return;
       }
@@ -142,7 +135,7 @@ export class OrderPage {
     };
     this.rest.requestOrder(data).subscribe(
       (res) => {
-        if(res.res_code != 'ok'){
+        if (res.res_code != 'ok') {
           alert(res.res_msg);
           return;
         }

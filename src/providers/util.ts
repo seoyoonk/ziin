@@ -50,5 +50,10 @@ export class UtilProvider {
       }
     }
   }
+
+  mobileCheck(phoneNumber){
+    phoneNumber = this.normalizePhone(phoneNumber.replace(/-/gi, "").trim());
+    return !/^\d{3}-\d{3,4}-\d{4}$/.test(phoneNumber);
+  }
   
 }

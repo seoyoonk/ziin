@@ -10,14 +10,43 @@ import { RestProvider } from '../../providers/rest';
 export class MyGoodsListPage {
   @ViewChild(Nav) nav: Nav;
 
-  icons:any;
+  listKubun: any = "progressList";
+  complateViewYn: boolean = false;
+  cancelViewYn: boolean = false;
 
-  constructor(public navCtrl: NavController,public rest : RestProvider) {
+  progressDataList: any = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+  complateDataList: any = [];
+  cancelDataList: any = [];
+
+  constructor(public navCtrl: NavController, public rest: RestProvider) {
 
   }
 
-  segmentChanged(event){
-    console.log(event);
+  ionViewDidLoad() {
+
+  }
+
+  segmentChanged() {
+    if (this.listKubun == "complate" && !this.complateViewYn) {
+      this.complateViewYn = true;
+    } else if (this.listKubun == "cancel" && !this.cancelViewYn) {
+      this.cancelViewYn = true;
+    }
+  }
+
+  scrollEnd(infiniteScroll) {
+    switch (this.listKubun) {
+      case "progress":
+
+        break;
+      case "complate":
+
+        break;
+      case "calcel":
+
+        break;
+    }
+    infiniteScroll.complete();
   }
 
 }
