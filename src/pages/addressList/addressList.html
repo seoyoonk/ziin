@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title text-center>우편번호</ion-title>
+        <ion-buttons start>
+            <button ion-button (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-input style="width:80%;float:left" [(ngModel)]="searchStr"></ion-input>
+    <button style="width:20%;float:right;padding-top: 13px;padding-right: 8px;padding-bottom: 13px;padding-left: 8px;" (click)="search()">검색</button>
+    <ion-list no-lines>
+        <div style="width:100%;margin-top:1em;margin-bottom:1em" text-center *ngFor="let addr of addrList" (click)="addrSelected(addr)">
+            {{addr.addrjibun}}
+        </div>
+    </ion-list>
+    <ion-infinite-scroll (ionInfinite)="scrollEnd($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

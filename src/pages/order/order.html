@@ -34,34 +34,71 @@
       <span>원</span>
     </div>
     <span style="margin-top:0.5em;margin-bottom:0.5em">배송지</span>
-    <ion-row radio-group>
+    <ion-row radio-group [(ngModel)]="dlvAddrRadio">
       <ion-col>
         <ion-item>
-          <ion-label>기본배송지</ion-label>
-          <ion-radio value="def"></ion-radio>
+          <ion-label>기본</ion-label>
+          <ion-radio value="dft" disabled="{{!dlvAddrDataList.dft_delivery_addr}}" (ionSelect)="radioSelect()"></ion-radio>
         </ion-item>
       </ion-col>
       <ion-col>
         <ion-item>
-          <ion-label>최근배송지</ion-label>
-          <ion-radio value="old"></ion-radio>
+          <ion-label>최근</ion-label>
+          <ion-radio value="rct" disabled="{{!dlvAddrDataList.recent_order_delivery_addr}}" (ionSelect)="radioSelect()"></ion-radio>
         </ion-item>
       </ion-col>
       <ion-col>
         <ion-item>
-          <ion-label>신규입력</ion-label>
-          <ion-radio value="new"></ion-radio>
+          <ion-label>신규</ion-label>
+          <ion-radio value="new" (ionSelect)="radioSelect()"></ion-radio>
         </ion-item>
       </ion-col>
     </ion-row>
+    <ion-item>
+      <ion-label>성명</ion-label>
+      <input style="width:70%" item-right [(ngModel)]="dlvAddrData.receiver_nm">
+    </ion-item>
+    <ion-item>
+      <ion-label>연락처</ion-label>
+      <input style="width:70%" item-right [(ngModel)]="dlvAddrData.receiver_mobile">
+    </ion-item>
+    <ion-item>
+      <ion-label>우편번호</ion-label>
+      <input item-right [readonly]="true" [(ngModel)]="dlvAddrData.receiver_zipcode">
+      <button item-right ion-button (click)="searchAddr()">우편번호검색</button>
+    </ion-item>
+    <ion-item>
+      <ion-label>기본주소</ion-label>
+      <input style="width:70%" item-right [readonly]="true" [(ngModel)]="dlvAddrData.receiver_addr_1">
+    </ion-item>
+    <ion-item>
+      <ion-label>상세주소</ion-label>
+      <input style="width:70%" item-right [(ngModel)]="dlvAddrData.receiver_addr_2">
+    </ion-item>
+    <span>결제수단</span>
+    <select [(ngModel)]="settle_tp">
+      <option value="C">신용카드</option>
+      <option value="o">계좌이체</option>
+      <option value="h">휴대폰결제</option>
+      <option value="v">가상계좌</option>
+    </select>
+
+    <ion-item [hidden]="rest.userInfo.mem_no != ''">
+      <ion-label>주문자 이름</ion-label>
+      <ion-input [(ngModel)]="orderer_nm"></ion-input>
+    </ion-item>
+    <ion-item [hidden]="rest.userInfo.mem_no != ''">
+      <ion-label>주문자 연락처</ion-label>
+      <ion-input [(ngModel)]="orderer_mobile"></ion-input>
+    </ion-item>
   </div>
 </ion-content>
 
 <ion-footer>
   <ion-toolbar color="primary">
     <ion-buttons text-center>
-      <button ion-button clear small icon-start>
-        <span>카드결제하기</span>
+      <button ion-button clear small icon-start (click)="order()">
+        <span>결제하기</span>
       </button>
     </ion-buttons>
   </ion-toolbar>

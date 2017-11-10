@@ -39,4 +39,16 @@ export class UtilProvider {
     }
     return x1 + x2;
   }
+
+  objectClone(obj, target) {
+    if (obj === null || typeof(obj) !== 'object'){
+      return obj;
+    }
+    for (var attr in obj) {
+      if (obj.hasOwnProperty(attr)) {
+        target[attr] = obj[attr];
+      }
+    }
+  }
+  
 }

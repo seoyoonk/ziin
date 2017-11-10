@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-segment [(ngModel)]="icons" color="secondary" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="camera">
+      <ion-icon name="camera"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="bookmark">
+      <ion-icon name="bookmark"></ion-icon>
+    </ion-segment-button>
+  </ion-segment>
+  <div [ngSwitch]="icons">
+    <ion-list *ngSwitchCase="'camera'">
+      <ion-item>
+        <ion-thumbnail item-start>
+            <ion-icon name="camera"></ion-icon>
+        </ion-thumbnail>
+        <h2>Ruby</h2>
+      </ion-item>
+      ...
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'bookmark'">
+      <ion-item>
+        <ion-thumbnail item-start>
+            <ion-icon name="bookmark"></ion-icon>
+        </ion-thumbnail>
+        <h2>Luna</h2>
+      </ion-item>
+      ...
+    </ion-list>
+  </div>
+</ion-content>

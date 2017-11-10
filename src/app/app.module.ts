@@ -8,6 +8,8 @@ import { DetailPage } from '../pages/detail/detail';
 import { ListPage } from '../pages/list/list';
 import { RegisterPage } from '../pages/register/register';
 import { OrderPage } from '../pages/order/order';
+import { MyGoodsListPage } from '../pages/myGoodsList/myGoodsList';
+import { AddressListPage } from '../pages/addressList/addressList';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { RestProvider } from '../providers/rest';
@@ -38,7 +40,7 @@ import { ZNDateComponent, ZNChkTodayComponent } from '../comp/dateExp';
     MyApp,
     HomePage,WebLoginPage,PictureSelPopup,RcmdSelPopup,DetailPage,OrderPage,
     ListPage, RegisterPage,GoodsRegisterPage,ContactPickupPage,CommentPage,ZNScoreComponent, 
-    OrderPage, ZNDateComponent,ZNChkTodayComponent,NotLoginPage
+    OrderPage, ZNDateComponent,ZNChkTodayComponent,NotLoginPage,AddressListPage, MyGoodsListPage
   ],
   imports: [
     BrowserModule,
@@ -51,7 +53,7 @@ import { ZNDateComponent, ZNChkTodayComponent } from '../comp/dateExp';
   entryComponents: [
     MyApp,PictureSelPopup,RcmdSelPopup,DetailPage,OrderPage,
     HomePage,WebLoginPage,ContactPickupPage,CommentPage,
-    ListPage, RegisterPage,GoodsRegisterPage, OrderPage,NotLoginPage
+    ListPage, RegisterPage,GoodsRegisterPage, OrderPage,NotLoginPage,AddressListPage, MyGoodsListPage
   ],
   providers: [
     StatusBar,
