@@ -15,12 +15,17 @@ export class GoodsRegisterPage {
 
     goodsInfo:any = {goods_nm:'',detail_img : [],  list_img_1:{ file_nm :'list.jpg',   stream_string :'' },       detail_desc:'', goods_opt_list :[{opt_nm_1:"1",main_yn:"y"}]}; 
     images;
+    minDate: Date;
+    maxDate: Date;
     isNew :boolean = true;
     response : any = {goods_no:683, list_img_1:'/2017/10/20/c4127d71-03ff-44d7-8502-be802c759d9a.PNG'}
     constructor( private viewCtrl: ViewController, private popoverCtrl: PopoverController, private rest:RestProvider,
         private util:UtilProvider, private contacts:Contacts, private file : File) {
         this.images = util.images;
-        
+        this.minDate = new Date();
+        this.minDate.setDate(this.minDate.getDate() + 1);
+        this.maxDate = new Date();
+        this.minDate.setFullYear(this.minDate.getFullYear() + 10);
     }
     delImage(idx)
     {

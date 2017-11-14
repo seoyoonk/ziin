@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-navbar>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-segment [(ngModel)]="listKubun" color="first" (ionChange)="segmentChanged()" ion-fixed style="background: white">
+    <ion-segment-button value="ing">
+      <span>배송중</span>
+    </ion-segment-button>
+    <ion-segment-button value="complate">
+      <span>배송완료</span>
+    </ion-segment-button>
+    <ion-segment-button value="cancel">
+      <span>환불/취소</span>
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-item style="margin-top: 4.2rem;">
+    <ion-label>주문일자 범위</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-datetime max="{{getMinMaxDate('fromMax') | date: 'yyyy-MM-dd'}}"  displayFormat="YYYY-MM-DD" [(ngModel)]="dt_from"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-datetime max="{{getMinMaxDate('toMax') | date: 'yyyy-MM-dd'}}" min="{{getMinMaxDate('toMin') | date: 'yyyy-MM-dd'}}" displayFormat="YYYY-MM-DD" [(ngModel)]="dt_to"></ion-datetime>
+  </ion-item>
+  <ion-item style="margin-top: 4.2rem;">
+    <button (click)="search()">검색</button>
+  </ion-item>
+  <div [ngSwitch]="listKubun">
+    <ion-list *ngSwitchCase="'ing'">
+      <ion-item *ngFor="let ingData of ingDataList">
+        <ion-thumbnail item-start>
+          <img [src]="rest.config.img_goods_root_path + ingData.order_item_list[0].list_img_1">
+        </ion-thumbnail>
+        <p><zn-date-format val="{{ingData.order_dttm}}"></zn-date-format></p>
+        <p>{{ingData.order_item_list[0].goods_nm}} {{ingData.order_item_list[0]._disp_order_status_nm}}</p>
+        <p>{{ingData.order_amnt}}원</p>
+        <p><button>1</button><button>2</button><button>3</button><button>4</button></p>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'complate'">
+      <ion-item *ngFor="let complateData of complateDataList">
+        <ion-thumbnail item-start>
+          <img [src]="rest.config.img_goods_root_path + ingData.order_item_list[0].list_img_1">
+        </ion-thumbnail>
+        
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'cancel'">
+      <ion-item *ngFor="let cancelData of cancelDataList">
+        <ion-thumbnail item-start>
+          <img [src]="rest.config.img_goods_root_path + ingData.order_item_list[0].list_img_1">
+        </ion-thumbnail>
+      </ion-item>
+    </ion-list>
+
+    <ion-infinite-scroll (ionInfinite)="scrollEnd($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+</ion-content>

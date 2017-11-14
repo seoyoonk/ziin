@@ -8,7 +8,7 @@ import { DetailPage } from '../pages/detail/detail';
 import { ListPage } from '../pages/list/list';
 import { RegisterPage } from '../pages/register/register';
 import { OrderPage } from '../pages/order/order';
-import { MyGoodsListPage } from '../pages/myGoodsList/myGoodsList';
+import { MyOrderListPage } from '../pages/myOrderList/myOrderList';
 import { AddressListPage } from '../pages/addressList/addressList';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -34,13 +34,13 @@ import { PictureSelPopup } from '../pages/popup/pictureSel';
 import { RcmdSelPopup } from '../pages/popup/rcmdSel';
 import { File } from '@ionic-native/file';
 import { ZNScoreComponent } from '../comp/score';
-import { ZNDateComponent, ZNChkTodayComponent } from '../comp/dateExp';
+import { ZNDateComponent, ZNChkTodayComponent, ZNDateFormatComponent } from '../comp/dateExp';
 @NgModule({
   declarations: [
     MyApp,
     HomePage,WebLoginPage,PictureSelPopup,RcmdSelPopup,DetailPage,OrderPage,
     ListPage, RegisterPage,GoodsRegisterPage,ContactPickupPage,CommentPage,ZNScoreComponent, 
-    OrderPage, ZNDateComponent,ZNChkTodayComponent,NotLoginPage,AddressListPage, MyGoodsListPage
+    OrderPage, ZNDateComponent,ZNChkTodayComponent,ZNDateFormatComponent,NotLoginPage,AddressListPage, MyOrderListPage
   ],
   imports: [
     BrowserModule,
@@ -53,7 +53,7 @@ import { ZNDateComponent, ZNChkTodayComponent } from '../comp/dateExp';
   entryComponents: [
     MyApp,PictureSelPopup,RcmdSelPopup,DetailPage,OrderPage,
     HomePage,WebLoginPage,ContactPickupPage,CommentPage,
-    ListPage, RegisterPage,GoodsRegisterPage, OrderPage,NotLoginPage,AddressListPage, MyGoodsListPage
+    ListPage, RegisterPage,GoodsRegisterPage, OrderPage,NotLoginPage,AddressListPage, MyOrderListPage
   ],
   providers: [
     StatusBar,

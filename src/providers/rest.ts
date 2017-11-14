@@ -11,8 +11,8 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class RestProvider {
-  //public apiUrl = 'http://14.63.197.21:7070';
-  public apiUrl = 'http://192.168.0.17:8080';
+  public apiUrl = 'http://14.63.197.21:7070';
+  //public apiUrl = 'http://192.168.0.17:8080';
   public app_ver = "0.1";
   public app_id = "com.fliconz.ziin";
   loading;
@@ -170,6 +170,10 @@ export class RestProvider {
   requestOrder(data) {
 
     return this.post("/api/order/requestOrder.do", data);
+  }
+  getOrderPageList(data) {
+
+    return this.post("/api/order/getOrderPageList.do", data);
   }
   
 }
