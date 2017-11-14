@@ -82,7 +82,7 @@
         </ion-item>
         <ion-item>
                 <ion-label >주문마감일</ion-label>
-                <ion-datetime min="" max="" displayFormat="YYYY-MM-DD" [(ngModel)]="goodsInfo.sale_end_dd"></ion-datetime>
+                <ion-datetime min="{{minDate | date: 'yyyy-MM-dd'}}" max="{{maxDate | date: 'yyyy-MM-dd'}}" displayFormat="YYYY-MM-DD" [(ngModel)]="goodsInfo.sale_end_dd"></ion-datetime>
         </ion-item>
         
         <ion-item>

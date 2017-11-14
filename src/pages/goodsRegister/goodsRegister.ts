@@ -25,7 +25,7 @@ export class GoodsRegisterPage {
         this.minDate = new Date();
         this.minDate.setDate(this.minDate.getDate() + 1);
         this.maxDate = new Date();
-        this.minDate.setFullYear(this.minDate.getFullYear() + 10);
+        this.maxDate.setFullYear(this.maxDate.getFullYear() + 10);
     }
     delImage(idx)
     {
