@@ -1,0 +1,36 @@
+<div text-center>구매확정을 하시겠습니까?</div>
+상품평가
+<ion-row radio-group [(ngModel)]="goods_rate">
+    <ion-col>
+      <ion-item>
+        <ion-label style="font-size:0.5em">매우만족</ion-label>
+        <ion-radio value="10"></ion-radio>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label style="font-size:0.5em">만족</ion-label>
+        <ion-radio value="8"></ion-radio>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label style="font-size:0.5em">보통</ion-label>
+        <ion-radio value="6"></ion-radio>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label style="font-size:0.5em">불만</ion-label>
+        <ion-radio value="4"></ion-radio>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label style="font-size:0.5em">매우불만</ion-label>
+        <ion-radio value="2"></ion-radio>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-textarea [(ngModel)]="confirm_content"></ion-textarea>
+  <button (click)="submit()" ion-button>확인</button><button (click)="close()" ion-button>취소</button>

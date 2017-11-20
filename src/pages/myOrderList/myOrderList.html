@@ -3,11 +3,11 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <ion-segment [(ngModel)]="listKubun" color="first" (ionChange)="segmentChanged()" ion-fixed style="background: white">
+  <ion-segment [(ngModel)]="listKubun" color="first" ion-fixed style="background: white">
     <ion-segment-button value="ing">
       <span>배송중</span>
     </ion-segment-button>
-    <ion-segment-button value="complate">
+    <ion-segment-button value="complete">
       <span>배송완료</span>
     </ion-segment-button>
     <ion-segment-button value="cancel">
@@ -19,10 +19,11 @@
     <ion-label>주문일자 범위</ion-label>
   </ion-item>
   <ion-item>
-    <ion-datetime max="{{getMinMaxDate('fromMax') | date: 'yyyy-MM-dd'}}"  displayFormat="YYYY-MM-DD" [(ngModel)]="dt_from"></ion-datetime>
+    <ion-datetime max="{{getMinMaxDate('fromMax') | date: 'yyyy-MM-dd'}}" displayFormat="YYYY-MM-DD" [(ngModel)]="dt_from"></ion-datetime>
   </ion-item>
   <ion-item>
-    <ion-datetime max="{{getMinMaxDate('toMax') | date: 'yyyy-MM-dd'}}" min="{{getMinMaxDate('toMin') | date: 'yyyy-MM-dd'}}" displayFormat="YYYY-MM-DD" [(ngModel)]="dt_to"></ion-datetime>
+    <ion-datetime max="{{getMinMaxDate('toMax') | date: 'yyyy-MM-dd'}}" min="{{getMinMaxDate('toMin') | date: 'yyyy-MM-dd'}}"
+      displayFormat="YYYY-MM-DD" [(ngModel)]="dt_to"></ion-datetime>
   </ion-item>
   <ion-item style="margin-top: 4.2rem;">
     <button (click)="search()">검색</button>
@@ -31,29 +32,69 @@
     <ion-list *ngSwitchCase="'ing'">
       <ion-item *ngFor="let ingData of ingDataList">
         <ion-thumbnail item-start>
-          <img [src]="rest.config.img_goods_root_path + ingData.order_item_list[0].list_img_1">
+          <img [src]="rest.config.img_goods_root_path + ingData.list_img_1">
         </ion-thumbnail>
-        <p><zn-date-format val="{{ingData.order_dttm}}"></zn-date-format></p>
-        <p>{{ingData.order_item_list[0].goods_nm}} {{ingData.order_item_list[0]._disp_order_status_nm}}</p>
+        <p>
+          <zn-date-format val="{{ingData.order_dttm}}"></zn-date-format>
+        </p>
+        <p>{{ingData.goods_nm}} {{ingData._disp_order_status_nm}}</p>
         <p>{{ingData.order_amnt}}원</p>
-        <p><button>1</button><button>2</button><button>3</button><button>4</button></p>
+        <p>
+          <button class="ingListBtn" (click)="cancel(ingData)">
+            <span [hidden]="ingData.settle_yn != 'n'" color="first">환불요청</span>
+            <span [hidden]="!(ingData.delivery_yn == 'n' && ingData.settle_yn == 'y')" color="first">환불요청</span>
+            <span [hidden]="ingData.delivery_yn != 'y'">반품요청</span>
+          </button>|
+          <button class="ingListBtn" (click)="repurchase(ingData)">재구매</button>|
+          <button class="ingListBtn" (click)="showAddr(ingData)">배송지</button>
+        </p>
+        <p>
+          <span [hidden]="addrIsHidden(ingData)">{{ingData.receiver_addr_1}} {{ingData.receiver_addr_2}}</span>
+        </p>
       </ion-item>
     </ion-list>
 
-    <ion-list *ngSwitchCase="'complate'">
-      <ion-item *ngFor="let complateData of complateDataList">
+    <ion-list *ngSwitchCase="'complete'">
+      <ion-item *ngFor="let completeData of completeDataList">
         <ion-thumbnail item-start>
-          <img [src]="rest.config.img_goods_root_path + ingData.order_item_list[0].list_img_1">
+          <img [src]="rest.config.img_goods_root_path + completeData.list_img_1">
         </ion-thumbnail>
-        
+        <p>
+            <zn-date-format val="{{completeData.order_dttm}}"></zn-date-format>
+          </p>
+          <p>{{completeData.goods_nm}} {{completeData._disp_order_status_nm}}</p>
+          <p>{{completeData.order_amnt}}원</p>
+          <p>
+            <button class="ingListBtn" (click)="cancel(completeData)">
+              <span>반품요청</span>
+            </button>|
+            <button class="ingListBtn" (click)="confirm(completeData)">수취확인</button>|
+            <button class="ingListBtn" (click)="repurchase(completeData)">재구매</button>|
+            <button class="ingListBtn" (click)="showAddr(completeData)">배송지</button>
+          </p>
+          <p>
+            <span [hidden]="addrIsHidden(completeData)">{{completeData.receiver_addr_1}} {{completeData.receiver_addr_2}}</span>
+          </p>
       </ion-item>
     </ion-list>
 
     <ion-list *ngSwitchCase="'cancel'">
       <ion-item *ngFor="let cancelData of cancelDataList">
         <ion-thumbnail item-start>
-          <img [src]="rest.config.img_goods_root_path + ingData.order_item_list[0].list_img_1">
+          <img [src]="rest.config.img_goods_root_path + cancelData.list_img_1">
         </ion-thumbnail>
+        <p>
+            <zn-date-format val="{{cancelData.order_dttm}}"></zn-date-format>
+          </p>
+          <p>{{cancelData.goods_nm}} </p>
+          <p>{{cancelData.order_amnt}}원</p>
+          <p>
+            <button class="ingListBtn" (click)="repurchase(cancelData)">재구매</button>|
+            <button class="ingListBtn" (click)="showAddr(cancelData)">배송지</button>
+          </p>
+          <p [hidden]="addrIsHidden(cancelData)">
+            <span >{{cancelData.receiver_addr_1}} {{cancelData.receiver_addr_2}}</span>
+          </p>
       </ion-item>
     </ion-list>
 

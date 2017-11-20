@@ -10,15 +10,19 @@ import { AddressListPage } from '../addressList/addressList';
 export class OrderPage {
 
   goods_ea: number = 1;
-  settle_tp: any = "C";
+  settle_tp: any = "c";
   dlvAddrRadio: any;
   dlvAddrDataList: any = {};
   dlvAddrData: any = {};
   searchData: any = {};
   orderer_nm: any;
   orderer_mobile: any;
+  data: any = {list_img_1 : "", goods_opt_list: [{}]};
 
   ionViewDidLoad() {
+
+  }
+  getAddr() {
     this.rest.selectOrderDeliveryAddr().subscribe(
       (res) => {
         this.dlvAddrDataList = res.res_data;
@@ -31,17 +35,28 @@ export class OrderPage {
         } else {
           this.dlvAddrRadio = "old";
         }
+        this.rest.closeLoading();
       },
       (err) => {
 
       });
-    console.log(this.params);
   }
   dismiss() {
     this.viewCtrl.dismiss();
   }
   constructor(public viewCtrl: ViewController, private util: UtilProvider, private modalCtrl: ModalController, public rest: RestProvider, public params: NavParams) {
+this.rest.showLoading("");
+    this.rest.selectOneGoodsRcmd({ goods_no: this.params.data.goods_no }).subscribe(
+      (res) => {
 
+        this.data = res.res_data;
+        console.log(this.data)
+        this.getAddr();
+
+      },
+      err => {
+        alert("ERROR!: " + err);
+      })
   }
 
   minusGoodsEa() {
@@ -52,7 +67,7 @@ export class OrderPage {
     --this.goods_ea;
   }
   plusGoodsEa() {
-    if (this.goods_ea == this.params.data.tot_stock_cnt) {
+    if (this.goods_ea == this.data.tot_stock_cnt) {
       alert("재고보다 많이 구매하실수 없습니다.");
       return;
     }
@@ -114,11 +129,11 @@ export class OrderPage {
       }
 
     }
-    let order_amnt = this.goods_ea * this.params.data.goods_opt_list[0].sellprice
+    let order_amnt = this.goods_ea * this.data.goods_opt_list[0].sellprice
     let data = {
       order_item_list: [{
-        goods_no: this.params.data.goods_no
-        , opt_no: this.params.data.goods_opt_list[0].opt_no
+        goods_no: this.data.goods_no
+        , opt_no: this.data.goods_opt_list[0].opt_no
         , order_ea: this.goods_ea
       }]
       , receiver_nm: this.dlvAddrData.receiver_nm.trim()
@@ -139,6 +154,8 @@ export class OrderPage {
           alert(res.res_msg);
           return;
         }
+        alert("주문이 완료되었습니다.");
+        this.dismiss();
       });
   }
 

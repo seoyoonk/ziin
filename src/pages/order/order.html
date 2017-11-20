@@ -14,11 +14,11 @@
     <div style="margin-top:1.2em;margin-bottom:1.2em">
       <span style="font-size:1.2em">주문내역</span>
     </div>
-    <img style="width:6em" float-left [src]="rest.config.img_goods_root_path + params.data.list_img_1">
+    <img style="width:6em" float-left [src]="rest.config.img_goods_root_path + data.list_img_1">
     <div text-right>
-      <span>{{params.data.goods_nm}}</span>
+      <span>{{data.goods_nm}}</span>
       <p>
-        <span>{{params.data.goods_opt_list[0].sellprice | number}}</span>
+        <span>{{data.goods_opt_list[0].sellprice | number}}</span>
       </p>
     </div>
     <div>
@@ -30,7 +30,7 @@
       <button style="width:3em;height:3em" (click)="plusGoodsEa()">
         <ion-icon name="add"></ion-icon>
       </button>
-      <span>{{goods_ea * params.data.goods_opt_list[0].sellprice | number}}</span>
+      <span>{{goods_ea * data.goods_opt_list[0].sellprice | number}}</span>
       <span>원</span>
     </div>
     <span style="margin-top:0.5em;margin-bottom:0.5em">배송지</span>
@@ -77,7 +77,7 @@
     </ion-item>
     <span>결제수단</span>
     <select [(ngModel)]="settle_tp">
-      <option value="C">신용카드</option>
+      <option value="c">신용카드</option>
       <option value="o">계좌이체</option>
       <option value="h">휴대폰결제</option>
       <option value="v">가상계좌</option>

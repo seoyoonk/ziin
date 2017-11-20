@@ -32,15 +32,18 @@ import { UtilProvider } from '../providers/util';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { PictureSelPopup } from '../pages/popup/pictureSel';
 import { RcmdSelPopup } from '../pages/popup/rcmdSel';
+import { OrderCancelPage } from '../pages/popover/orderCancel';
+import { OrderConfirmPage } from '../pages/popover/orderConfirm';
 import { File } from '@ionic-native/file';
 import { ZNScoreComponent } from '../comp/score';
 import { ZNDateComponent, ZNChkTodayComponent, ZNDateFormatComponent } from '../comp/dateExp';
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,WebLoginPage,PictureSelPopup,RcmdSelPopup,DetailPage,OrderPage,
-    ListPage, RegisterPage,GoodsRegisterPage,ContactPickupPage,CommentPage,ZNScoreComponent, 
-    OrderPage, ZNDateComponent,ZNChkTodayComponent,ZNDateFormatComponent,NotLoginPage,AddressListPage, MyOrderListPage
+    HomePage, WebLoginPage, PictureSelPopup, RcmdSelPopup, DetailPage, OrderPage,
+    ListPage, RegisterPage, GoodsRegisterPage, ContactPickupPage, CommentPage, ZNScoreComponent,
+    OrderPage, ZNDateComponent, ZNChkTodayComponent, ZNDateFormatComponent, NotLoginPage, AddressListPage, 
+    MyOrderListPage, OrderCancelPage, OrderConfirmPage
   ],
   imports: [
     BrowserModule,
@@ -51,16 +54,17 @@ import { ZNDateComponent, ZNChkTodayComponent, ZNDateFormatComponent } from '../
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,PictureSelPopup,RcmdSelPopup,DetailPage,OrderPage,
-    HomePage,WebLoginPage,ContactPickupPage,CommentPage,
-    ListPage, RegisterPage,GoodsRegisterPage, OrderPage,NotLoginPage,AddressListPage, MyOrderListPage
+    MyApp, PictureSelPopup, RcmdSelPopup, DetailPage, OrderPage,
+    HomePage, WebLoginPage, ContactPickupPage, CommentPage, ListPage, 
+    RegisterPage, GoodsRegisterPage, OrderPage, NotLoginPage, AddressListPage, 
+    MyOrderListPage, OrderCancelPage, OrderConfirmPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     RestProvider, FCM, File,
-    Sim,KakaoTalk,Device,StartProvider,Contacts, Camera, ImagePicker, UtilProvider,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    Sim, KakaoTalk, Device, StartProvider, Contacts, Camera, ImagePicker, UtilProvider,
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
-export class AppModule {}
+export class AppModule { }

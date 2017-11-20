@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { ViewController, ModalController, NavParams, PopoverController} from 'ionic-angular';
+import { ViewController, ModalController, NavParams, PopoverController } from 'ionic-angular';
 import { GoodsRegisterPage } from '../goodsRegister/goodsRegister';
 import { RestProvider } from '../../providers/rest';
 import { CommentPage } from '../comment/comment';
@@ -43,17 +43,16 @@ export class DetailPage {
     modal.present();
 
   }
-  showRcmdSel()
-  {
-      this.data.sellprice = this.data.goods_opt_list[0].sellprice;
-      let popover = this.popoverCtrl.create(RcmdSelPopup,this.data);
-      popover.present();
+  showRcmdSel() {
+    this.data.sellprice = this.data.goods_opt_list[0].sellprice;
+    let popover = this.popoverCtrl.create(RcmdSelPopup, this.data);
+    popover.present();
   }
-  constructor(private popoverCtrl:PopoverController, public viewCtrl: ViewController, private modalCtrl: ModalController, public rest: RestProvider, public params: NavParams) {
-    
+  constructor(private popoverCtrl: PopoverController, public viewCtrl: ViewController, private modalCtrl: ModalController, public rest: RestProvider, public params: NavParams) {
+
   }
   goOrder() {
-    let modal = this.modalCtrl.create(OrderPage, this.data);
+    let modal = this.modalCtrl.create(OrderPage, { goods_no: this.params.data.goods_no });
     modal.present();
   }
 

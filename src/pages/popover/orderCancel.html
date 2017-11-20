@@ -1,0 +1,16 @@
+<div text-center>환불하시겠습니까?</div>
+환불사유
+<select [(ngModel)]="cancel_tp_cd">
+    <option value="1">고객변심취소</option>
+    <option value="10">거래미성사</option>
+    <option value="2">품절취소</option>
+    <option value="3">배송지연취소</option>
+    <option value="4">이중주문취소</option>
+    <option value="5">시스템오류취소</option>
+    <option value="6">누락배송</option>
+    <option value="7">택배분실</option>
+    <option value="8">상품불량</option>
+    <option value="9">기타</option>
+  </select>
+  <ion-textarea [(ngModel)]="cancel_content"></ion-textarea>
+  <button (click)="submit()" ion-button>확인</button><button (click)="close()" ion-button>취소</button>
